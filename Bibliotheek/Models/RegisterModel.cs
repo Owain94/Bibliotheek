@@ -13,8 +13,6 @@ namespace Bibliotheek.Models
     {
         #region Public Properties
 
-        #region Public Properties
-
         [Required(ErrorMessage = "Voormaam is verplicht")]
         [Display(Name = "Voornaam:")]
         public string FirstName { get; set; }
@@ -33,10 +31,6 @@ namespace Bibliotheek.Models
         public string Mail { get; set; }
 
         #endregion Public Properties
-
-        #endregion Public Properties
-
-        #region Public Methods
 
         #region Public Methods
 
@@ -157,8 +151,6 @@ namespace Bibliotheek.Models
                 }
             }
         }
-
-        #endregion Public Methods
 
         #endregion Public Methods
     }
