@@ -8,8 +8,10 @@ namespace Bibliotheek.Classes
 {
     public static class TimeConvert
     {
+        #region Public Methods
+
         // <summary>
-        //     Convert dateTime to readable version
+        // Convert dateTime to readable version 
         // </summary>
         public static string GetTimeAgo(DateTime strDate)
         {
@@ -20,7 +22,7 @@ namespace Bibliotheek.Classes
 
             var deltaSeconds = t.TotalSeconds;
 
-            var deltaMinutes = deltaSeconds/60.0f;
+            var deltaMinutes = deltaSeconds / 60.0f;
             int minutes;
 
             if (deltaSeconds < 5)
@@ -48,54 +50,58 @@ namespace Bibliotheek.Classes
                 return "Een uur geleden";
             }
 
-            if (deltaMinutes < (24*60))
+            if (deltaMinutes < (24 * 60))
             {
-                minutes = (int) Math.Floor(deltaMinutes/60);
+                minutes = (int)Math.Floor(deltaMinutes / 60);
                 return minutes + " uur geleden";
             }
 
-            if (deltaMinutes < (24*60*2))
+            if (deltaMinutes < (24 * 60 * 2))
             {
                 return "Gisteren";
             }
 
-            if (deltaMinutes < (24*60*7))
+            if (deltaMinutes < (24 * 60 * 7))
             {
-                minutes = (int) Math.Floor(deltaMinutes/(60*24));
+                minutes = (int)Math.Floor(deltaMinutes / (60 * 24));
                 return minutes + " dagen geleden";
             }
 
-            if (deltaMinutes < (24*60*14))
+            if (deltaMinutes < (24 * 60 * 14))
             {
                 return "Afgelopen week";
             }
 
-            if (deltaMinutes < (24*60*31))
+            if (deltaMinutes < (24 * 60 * 31))
             {
-                minutes = (int) Math.Floor(deltaMinutes/(60*24*7));
+                minutes = (int)Math.Floor(deltaMinutes / (60 * 24 * 7));
                 return minutes + " weken geleden";
             }
 
-            if (deltaMinutes < (24*60*61))
+            if (deltaMinutes < (24 * 60 * 61))
             {
                 return "Afgelopen maand";
             }
 
-            if (deltaMinutes < (24*60*365.25))
+            if (deltaMinutes < (24 * 60 * 365.25))
             {
-                minutes = (int) Math.Floor(deltaMinutes/(60*24*30));
+                minutes = (int)Math.Floor(deltaMinutes / (60 * 24 * 30));
                 return minutes + " maanden geleden";
             }
 
-            if (deltaMinutes < (24*60*731))
+            if (deltaMinutes < (24 * 60 * 731))
             {
                 return "Afgelopen jaar";
             }
 
-            minutes = (int) Math.Floor(deltaMinutes/(60*24*365));
+            minutes = (int)Math.Floor(deltaMinutes / (60 * 24 * 365));
 
             return minutes + " jaren geleden";
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
 
         private static bool IsDate(string o)
         {
@@ -103,5 +109,7 @@ namespace Bibliotheek.Classes
 
             return DateTime.TryParse(o, out tmp);
         }
+
+        #endregion Private Methods
     }
 }

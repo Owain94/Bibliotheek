@@ -10,8 +10,12 @@ namespace Bibliotheek.Classes
 {
     public abstract class Cookies
     {
+        #region Public Methods
+
+        #region Public Methods
+
         // <summary>
-        //     Create a HttpOnly cookie
+        // Create a HttpOnly cookie 
         // </summary>
         public static void MakeCookie(string name, string savedId)
         {
@@ -27,5 +31,9 @@ namespace Bibliotheek.Classes
             FormsAuthentication.SetAuthCookie(name, false);
             HttpContext.Current.Response.Cookies.Add(ck);
         }
+
+        #endregion Public Methods
+
+        #endregion Public Methods
     }
 }

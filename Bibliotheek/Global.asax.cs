@@ -12,10 +12,18 @@ using System.Web.UI;
 
 namespace Bibliotheek
 {
-    // Note: For instructions on enabling IIS6 or IIS7 classic mode,
-    // visit http://go.microsoft.com/?LinkId=9394801
+    // Note: For instructions on enabling IIS6 or IIS7 classic mode, visit http://go.microsoft.com/?LinkId=9394801 
     public class MvcApplication : HttpApplication
     {
+        #region Protected Methods
+
+        #region Protected Methods
+
+        protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
+        {
+            HttpContext.Current.Response.Headers.Remove("Server");
+        }
+
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -38,9 +46,8 @@ namespace Bibliotheek
             });
         }
 
-        protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
-        {
-            HttpContext.Current.Response.Headers.Remove("Server");
-        }
+        #endregion Protected Methods
+
+        #endregion Protected Methods
     }
 }

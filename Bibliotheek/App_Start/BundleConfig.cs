@@ -11,14 +11,16 @@ namespace Bibliotheek
 {
     public static class BundleConfig
     {
+        #region Public Methods
+
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.UseCdn = true;
 
             var nullOrderer = new NullOrderer();
 
-            // Replace a default bundle resolver in order to the debugging HTTP-handler
-            // can use transformations of the corresponding bundle
+            // Replace a default bundle resolver in order to the debugging HTTP-handler can use
+            // transformations of the corresponding bundle
             BundleResolver.Current = new CustomBundleResolver();
 
             var commonStylesBundle = new CustomStyleBundle("~/Bundles/CommonStyles");
@@ -40,5 +42,7 @@ namespace Bibliotheek
             commonScriptsBundle.Orderer = nullOrderer;
             bundles.Add(commonScriptsBundle);
         }
+
+        #endregion Public Methods
     }
 }

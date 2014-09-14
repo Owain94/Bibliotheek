@@ -11,6 +11,19 @@ namespace Bibliotheek.Controllers
 {
     public class AccountController : Controller
     {
+        #region Public Methods
+
+        #region Public Methods
+
+        //
+        // AJAX:
+        // GET: /Account/UsernameCheck
+        [EnableCompression]
+        public string MailCheck(string input)
+        {
+            return RegisterModel.CheckMail(SqlInjection.SafeSqlLiteral(input)) > 0 ? "Deze email is al bezet" : "";
+        }
+
         //
         // GET: /Account/
         [EnableCompression]
@@ -30,13 +43,8 @@ namespace Bibliotheek.Controllers
             return ModelState.IsValid ? View(model.AddAccount() ? "Success" : "Error") : View();
         }
 
-        //
-        // AJAX:
-        // GET: /Account/UsernameCheck
-        [EnableCompression]
-        public string MailCheck(string input)
-        {
-            return RegisterModel.CheckMail(SqlInjection.SafeSqlLiteral(input)) > 0 ? "Deze email is al bezet" : "";
-        }
+        #endregion Public Methods
+
+        #endregion Public Methods
     }
 }

@@ -9,8 +9,12 @@ namespace Bibliotheek.Classes
 {
     public static class SqlInjection
     {
+        #region Public Methods
+
+        #region Public Methods
+
         // <summary>
-        //     Replace certain chars so SQL injection can't be done on input fields
+        // Replace certain chars so SQL injection can't be done on input fields 
         // </summary>
         public static String SafeSqlLiteral(String inputSql)
         {
@@ -34,7 +38,7 @@ namespace Bibliotheek.Classes
         }
 
         // <summary>
-        //     Replace chars so the user sees the exact thing they did put in
+        // Replace chars so the user sees the exact thing they did put in 
         // </summary>
         public static String SafeSqlLiteralRevert(String inputSql)
         {
@@ -56,5 +60,9 @@ namespace Bibliotheek.Classes
 
             return HttpUtility.HtmlEncode(sql);
         }
+
+        #endregion Public Methods
+
+        #endregion Public Methods
     }
 }

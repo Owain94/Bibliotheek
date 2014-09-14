@@ -11,6 +11,10 @@ namespace Bibliotheek.Models
 {
     public class RegisterModel
     {
+        #region Public Properties
+
+        #region Public Properties
+
         [Required(ErrorMessage = "Voormaam is verplicht")]
         [Display(Name = "Voornaam:")]
         public string FirstName { get; set; }
@@ -28,92 +32,16 @@ namespace Bibliotheek.Models
         [Display(Name = "Email:")]
         public string Mail { get; set; }
 
-        // <summary>
-        //     Add account to the database and send a mail to the user
-        // </summary>
-        public bool AddAccount()
-        {
-            // Run model through sql prevention and save them to vars
-            var firstName = SqlInjection.SafeSqlLiteral(FirstName);
-            var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
-            var lastName = SqlInjection.SafeSqlLiteral(Lastname);
-            var mail = SqlInjection.SafeSqlLiteral(Mail);
+        #endregion Public Properties
 
-            // Validate email using regex since HTML5 validation doesn't handle some cases
-            if (!ValidateEmail.IsValidEmail(mail)) return false;
+        #endregion Public Properties
 
-            // Check if email doesn't exist already
-            const string countStatement = "SELECT COUNT(*) " +
-                                          "FROM meok2_bibliotheek_gebruikers " +
-                                          "WHERE email = ?";
+        #region Public Methods
 
-            using (var empConnection = DatabaseConnection.DatabaseConnect())
-            {
-                int count;
-                using (var countCommand = new MySqlCommand(countStatement, empConnection))
-                {
-                    // Bind parameters
-                    countCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
-                    try
-                    {
-                        DatabaseConnection.DatabaseOpen(empConnection);
-                        count = Convert.ToInt32(countCommand.ExecuteScalar());
-                    }
-                    catch (MySqlException)
-                    {
-                        // MySqlException bail out
-                        return false;
-                    }
-                    finally
-                    {
-                        // Make sure to close the connection
-                        DatabaseConnection.DatabaseClose(empConnection);
-                    }
-                }
-
-                if (count > 0)
-                {
-                    // Email already in the database bail out
-                    return false;
-                }
-
-                // Insert user in the database
-                const string insertStatement = "INSERT INTO meok2_bibliotheek_gebruikers " +
-                                               "(voornaam, tussenvoegsel, achternaam, email) " +
-                                               "VALUES (?, ?, ?, ?)";
-
-                using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
-                {
-                    // Bind parameters
-                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = firstName;
-                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = inclusion;
-                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = lastName;
-                    insertCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
-
-                    try
-                    {
-                        DatabaseConnection.DatabaseOpen(empConnection);
-                        insertCommand.ExecuteNonQuery();
-
-                        // Send mail bail out if mail fails
-                        return Message.SendMail(firstName, mail) == "False";
-                    }
-                    catch (MySqlException)
-                    {
-                        // MySqlException bail out
-                        return false;
-                    }
-                    finally
-                    {
-                        // Make sure to close the connection
-                        DatabaseConnection.DatabaseClose(empConnection);
-                    }
-                }
-            }
-        }
+        #region Public Methods
 
         // <summary>
-        //     Check if email is in the database already
+        // Check if email is in the database already 
         // </summary>
         public static int CheckMail(string mail)
         {
@@ -126,7 +54,7 @@ namespace Bibliotheek.Models
             {
                 using (var countCommand = new MySqlCommand(countStatement, empConnection))
                 {
-                    // Bind parameters
+                    // Bind parameters 
                     countCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
 
                     try
@@ -145,5 +73,93 @@ namespace Bibliotheek.Models
             }
             return count;
         }
+
+        // <summary>
+        // Add account to the database and send a mail to the user 
+        // </summary>
+        public bool AddAccount()
+        {
+            // Run model through sql prevention and save them to vars 
+            var firstName = SqlInjection.SafeSqlLiteral(FirstName);
+            var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
+            var lastName = SqlInjection.SafeSqlLiteral(Lastname);
+            var mail = SqlInjection.SafeSqlLiteral(Mail);
+
+            // Validate email using regex since HTML5 validation doesn't handle some cases 
+            if (!ValidateEmail.IsValidEmail(mail)) return false;
+
+            // Check if email doesn't exist already 
+            const string countStatement = "SELECT COUNT(*) " +
+                                          "FROM meok2_bibliotheek_gebruikers " +
+                                          "WHERE email = ?";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                int count;
+                using (var countCommand = new MySqlCommand(countStatement, empConnection))
+                {
+                    // Bind parameters 
+                    countCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        count = Convert.ToInt32(countCommand.ExecuteScalar());
+                    }
+                    catch (MySqlException)
+                    {
+                        // MySqlException bail out 
+                        return false;
+                    }
+                    finally
+                    {
+                        // Make sure to close the connection 
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+
+                if (count > 0)
+                {
+                    // Email already in the database bail out 
+                    return false;
+                }
+
+                // Insert user in the database 
+                const string insertStatement = "INSERT INTO meok2_bibliotheek_gebruikers " +
+                                               "(voornaam, tussenvoegsel, achternaam, email) " +
+                                               "VALUES (?, ?, ?, ?)";
+
+                using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
+                {
+                    // Bind parameters 
+                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = firstName;
+                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = inclusion;
+                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = lastName;
+                    insertCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
+
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        insertCommand.ExecuteNonQuery();
+
+                        // Send mail bail out if mail fails 
+                        return Message.SendMail(firstName, mail) == "False";
+                    }
+                    catch (MySqlException)
+                    {
+                        // MySqlException bail out 
+                        return false;
+                    }
+                    finally
+                    {
+                        // Make sure to close the connection 
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+        }
+
+        #endregion Public Methods
+
+        #endregion Public Methods
     }
 }
