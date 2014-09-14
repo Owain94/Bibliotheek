@@ -1,0 +1,116 @@
+﻿@using System.Web.Optimization
+<!doctype html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9" lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en-US">
+    <!--<![endif]-->
+    <head>
+        <!-- META TAGS -->
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>@ViewBag.Title</title>
+        <link rel="shortcut icon" href="../../Images/favicon.png" />
+        <!-- Google Web Fonts-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+        <!-- Style Sheet-->
+        @Styles.Render("~/Bundles/CommonStyles")
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="../../Js/html5.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+        <!-- Start of Header -->
+        <div class="header-wrapper">
+            <header>
+                <div class="container">
+                    <!-- Start of Main Navigation -->
+                    <nav class="main-nav">
+                        <div class="menu-top-menu-container">
+                            <ul id="menu-top-menu" class="clearfix">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Over ons", "About", "Home")</li>
+                                <li>@Html.ActionLink("Registreren", "NewAccount", "Account")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <!-- End of Main Navigation -->
+                </div>
+            </header>
+        </div>
+        <!-- End of Header -->
+        <!-- Start of Search Wrapper -->
+        <div class="search-area-wrapper">
+            <div class="search-area container">
+                <h3 class="search-header">De Bibliotheek</h3>
+                <p class="search-tag-line">Zoekt u een boek? Typ hieronder de titel of auteur!</p>
+
+                <form id="search-form" class="search-form clearfix" method="get" action="#" autocomplete="off">
+                    <input class="search-term required" type="text" id="s" name="s" placeholder="Typ hier een boektitel" title="* Typ een zoekterm!" />
+                    <input class="search-btn" type="submit" value="Search" />
+                    <div id="search-error-container"></div>
+                </form>
+            </div>
+        </div>
+        <!-- End of Search Wrapper -->
+        <!-- Start of Page Container -->
+        <div class="page-container">
+            <div class="container">
+                <div class="row">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <!-- End of Page Container -->
+        <!-- Start of Footer -->
+        <footer id="footer-wrapper">
+            <div id="footer" class="container">
+                <div class="row">
+                    <div class="span6">
+                        <section class="widget">
+                            <h3 class="title">Lorem ipsum</h3>
+                            <div class="textwidget">
+                                <p>dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                                <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="span6">
+                        <section class="widget">
+                            <h3 class="title">Lorem ipsum</h3>
+                            <div class="textwidget">
+                                <p>dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
+                                <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <!-- end of #footer -->
+            <!-- Footer Bottom -->
+            <div id="footer-bottom-wrapper">
+                <div id="footer-bottom" class="container">
+                    <div class="row">
+                        <div class="span6">
+                            <p class="copyright">
+                                Copyright © 2014. Owain van Brakel
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Footer Bottom -->
+        </footer>
+        <!-- End of Footer -->
+        <a href="#top" id="scroll-top"></a>
+        <!-- script -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        @Scripts.Render("~/Bundles/CommonScripts")
+        @RenderSection("scripts", false)
+    </body>
+</html>

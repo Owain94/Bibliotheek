@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="span4 page-sidebar">
+    <section class="widget">
+        <h3 class="title">Geschiedenis</h3>
+        <div class="articles">
+            <img src="http://www.bibliotheek.rotterdam.nl/content/dam/zuid-holland/rotterdam/over-ons/Geschiedenis-definitief.jpg/jcr:content/renditions/cq5dam.web.384.614.jpeg" alt="" />
+            <p style="text-align: justify; text-justify: inter-word;">
+                In 1604 wordt door Rotterdam de eerste 'publycke bibliotheke' ofwel 'Bibliotheca Laurentiana' in de Laurenskerk ingericht. Toch duurt het nog tot 1869 tot archivaris J.H. Scheffer de grondslag legt voor de huidige bibliotheek. Eind negentiende eeuw zit de bibliotheek in het pand van Museum Boymans. Hier kunnen bezoekers twee keer per week boeken inzien. Al snel wordt deze locatie te klein en vestigt de bibliotheek zich in 1907 aan het Van Hogendorpsplein. Als in 1923 ook dit pand te klein is, wordt een pand betrokken aan de Nieuwe Markt.
+            </p>
+            <p style="text-align: justify; text-justify: inter-word;">
+                In 1940 raakt het gebouw tijdens het bombardement op Rotterdam beschadigd. De meeste gebouwen in de omgeving brandden volledig af. Hierdoor komt ruimte vrij voor de bouw van een oostelijke vleugel. Het pand met in gouden letters 'Gemeente bibliotheek' staat er anno 2014 nog steeds. In 1983 betrekt Bibliotheek Rotterdam haar huidige pand aan de Hoogstraat. Na 409 jaar gemeentebibliotheek te zijn geweest, verzelfstandigt de bibliotheek op 1 januari 2013. Stichting de Bibliotheek Rotterdam is een feit. Vandaag de dag is de bibliotheek met 2,4 miljoen bezoekers, 830.00 materialen, 2,9 miljoen uitleningen, honderden culturele activiteiten en 100.000 leden, de drukstbezochte culturele instelling van Rotterdam.
+            </p>
+        </div>
+    </section>
+</div>
+
+<div class="span4 page-sidebar">
+    <section class="widget">
+        <h3 class="title">Ondernemers</h3>
+        <div class="articles">
+            <img src="http://www.bibliotheek.rotterdam.nl/content/dam/zuid-holland/rotterdam/over-ons/Ondernemers-NW.jpg/jcr:content/renditions/cq5dam.web.384.614.jpeg" alt="" />
+            <p style="text-align: justify; text-justify: inter-word;">
+                Ondernemer en interesse in samenwerking? Onze deuren staan wijd open om krachten te bundelen! Tegenover elk serieus gesprek staat een mooi aanbod. Neem vrijblijvend contact met ons op.
+            </p>
+            <p>
+                @Html.ActionLink("Contact", "Contact", "Home", new {@class = "btn btn-inverse"})
+            </p>
+        </div>
+    </section>
+    <section class="widget">
+        <h3 class="title">Klantenpanel</h3>
+        <div class="articles">
+            <img src="http://www.bibliotheek.rotterdam.nl/content/dam/zuid-holland/rotterdam/over-ons/Klantenpanel-NW.jpg/jcr:content/renditions/cq5dam.web.384.614.jpeg" alt="" />
+            <p style="text-align: justify; text-justify: inter-word;">
+                We hechten veel waarde aan de mening van onze klanten. Daarom werken we sinds jaar en dag met een online klantenpanel. Interesse? Goed nieuws, we zijn op zoek naar uitbreiding van ons panel.
+            </p>
+            <p>
+                <a href="#" class="btn btn-inverse">Meer informatie</a>
+            </p>
+        </div>
+    </section>
+</div>
+
+<aside class="span4 page-sidebar">
+
+    @Html.Partial("_NewBook")
+
+    <section class="widget">
+        <h3 class="title">Abonnement</h3>
+        <div class="articles">
+            <img src="http://www.bibliotheek.rotterdam.nl/content/dam/zuid-holland/rotterdam/over-ons/banner_online-lid-worden_384.jpg/jcr:content/renditions/cq5dam.web.384.614.jpeg" alt="" />
+            <p style="text-align: justify; text-justify: inter-word;">
+                Ook in 2014 dicht Daniël verder als Stadsdichter. Het eerste gedicht is gepresenteerd en er zijn mooie nieuwe ideeën en plannen voor de rest van het jaar.
+            </p>
+            <p>
+                <a href="#" class="btn btn-inverse">Meer informatie</a>
+            </p>
+        </div>
+    </section>
+</aside>

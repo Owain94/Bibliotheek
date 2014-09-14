@@ -1,0 +1,83 @@
+﻿@model Bibliotheek.Models.RegisterModel
+@{
+    ViewBag.Title = "Registeren";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="span8 page-content">
+
+    <article class="type-page hentry clearfix">
+        <h1 class="post-title">
+            <a href="#">Registreren</a>
+        </h1>
+        <hr>
+    </article>
+    @using (Html.BeginForm("NewAccount", "Account",
+        new { ViewBag.ReturnUrl },
+        FormMethod.Post, new { @id = "contact-form", @class = "row" }))
+    {
+        <div class="span2">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Inclusion)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.Inclusion, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Inclusion)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Lastname)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.Lastname, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Lastname)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Mail)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.Mail, new { @class = "input-xlarge", type = "email" })
+            @Html.ValidationMessageFor(model => model.Mail)
+            <span id="returnData"></span>
+        </div>
+
+        <div class="span6 offset2 bm30">
+            <input type="submit" name="submit" value="Voeg toe" class="btn btn-inverse" disabled>
+            <img src="../../Images/loading.gif" id="contact-loader" alt="Laden...">
+        </div>
+
+        <div class="span6 offset2 error-container"></div>
+        <div class="span8 offset2" id="message-sent"></div>
+    }
+</div>
+
+<aside class="span4 page-sidebar">
+    @Html.Partial("_NewBook")
+</aside>
+
+@section scripts {
+    <script type="text/javascript">
+        $('#Mail').keyup(function () {
+            var url = "/Account/MailCheck";
+            var mail = $('#Mail').val();
+            if (mail.length > 5) {
+                $.get(url, { input: mail }, function (data) {
+                    $("#returnData").html(data);
+                    if (data == "") {
+                        $("input[type=submit]").removeAttr("disabled");
+                    } else {
+                        $("input[type=submit]").attr("disabled", "disabled");
+                    }
+                });
+            }
+        });
+    </script>
+}
