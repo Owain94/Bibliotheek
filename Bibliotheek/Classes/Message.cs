@@ -14,8 +14,6 @@ namespace Bibliotheek.Classes
     {
         #region Public Methods
 
-        #region Public Methods
-
         // <summary>
         // Send mail 
         // </summary>
@@ -70,10 +68,6 @@ namespace Bibliotheek.Classes
 
         #endregion Public Methods
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         #region Private Methods
 
         // <summary>
@@ -115,8 +109,6 @@ namespace Bibliotheek.Classes
             body = body.Replace("{MESSAGE}", message);
             return body;
         }
-
-        #endregion Private Methods
 
         #endregion Private Methods
     }

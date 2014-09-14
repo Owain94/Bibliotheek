@@ -13,8 +13,6 @@ namespace Bibliotheek.Controllers
     {
         #region Public Methods
 
-        #region Public Methods
-
         //
         // AJAX:
         // GET: /Account/UsernameCheck
@@ -42,8 +40,6 @@ namespace Bibliotheek.Controllers
             // If model isn't valid return with error messages, otherwise add the user return error or success based on the AddAccount() return
             return ModelState.IsValid ? View(model.AddAccount() ? "Success" : "Error") : View();
         }
-
-        #endregion Public Methods
 
         #endregion Public Methods
     }

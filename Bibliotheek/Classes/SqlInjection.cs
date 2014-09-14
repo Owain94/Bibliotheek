@@ -11,8 +11,6 @@ namespace Bibliotheek.Classes
     {
         #region Public Methods
 
-        #region Public Methods
-
         // <summary>
         // Replace certain chars so SQL injection can't be done on input fields 
         // </summary>
@@ -60,8 +58,6 @@ namespace Bibliotheek.Classes
 
             return HttpUtility.HtmlEncode(sql);
         }
-
-        #endregion Public Methods
 
         #endregion Public Methods
     }

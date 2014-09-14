@@ -11,15 +11,9 @@ namespace Bibliotheek.Attributes
     {
         #region Private Fields
 
-        #region Private Fields
-
         private const CompressionMode Compress = CompressionMode.Compress;
 
         #endregion Private Fields
-
-        #endregion Private Fields
-
-        #region Public Methods
 
         #region Public Methods
 
@@ -47,8 +41,6 @@ namespace Bibliotheek.Attributes
                 response.AppendHeader("Content-Encoding", "gzip");
             }
         }
-
-        #endregion Public Methods
 
         #endregion Public Methods
     }

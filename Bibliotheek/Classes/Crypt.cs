@@ -13,8 +13,6 @@ namespace Bibliotheek.Classes
     {
         #region Public Methods
 
-        #region Public Methods
-
         // <summary>
         // Create MD5 hash 
         // </summary>
@@ -108,10 +106,6 @@ namespace Bibliotheek.Classes
 
         #endregion Public Methods
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         #region Private Methods
 
         /// <summary>
@@ -147,8 +141,6 @@ namespace Bibliotheek.Classes
 
             return encryptedData;
         }
-
-        #endregion Private Methods
 
         #endregion Private Methods
     }

@@ -12,8 +12,6 @@ namespace Bibliotheek.Classes
     {
         #region Public Methods
 
-        #region Public Methods
-
         // <summary>
         // Create a HttpOnly cookie 
         // </summary>
@@ -31,8 +29,6 @@ namespace Bibliotheek.Classes
             FormsAuthentication.SetAuthCookie(name, false);
             HttpContext.Current.Response.Cookies.Add(ck);
         }
-
-        #endregion Public Methods
 
         #endregion Public Methods
     }

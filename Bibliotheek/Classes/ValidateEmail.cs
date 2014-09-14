@@ -12,15 +12,9 @@ namespace Bibliotheek.Classes
     {
         #region Private Fields
 
-        #region Private Fields
-
         private static bool _invalid;
 
         #endregion Private Fields
-
-        #endregion Private Fields
-
-        #region Public Methods
 
         #region Public Methods
 
@@ -63,10 +57,6 @@ namespace Bibliotheek.Classes
 
         #endregion Public Methods
 
-        #endregion Public Methods
-
-        #region Private Methods
-
         #region Private Methods
 
         private static string DomainMapper(Match match)
@@ -85,8 +75,6 @@ namespace Bibliotheek.Classes
             }
             return match.Groups[1].Value + domainName;
         }
-
-        #endregion Private Methods
 
         #endregion Private Methods
     }

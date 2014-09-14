@@ -13,8 +13,6 @@ namespace Bibliotheek.Controllers
     {
         #region Public Methods
 
-        #region Public Methods
-
         //
         // GET: /Home/About 
         [EnableCompression]
@@ -55,8 +53,6 @@ namespace Bibliotheek.Controllers
             // Get view 
             return View();
         }
-
-        #endregion Public Methods
 
         #endregion Public Methods
     }
