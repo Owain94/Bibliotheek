@@ -17,8 +17,6 @@ namespace Bibliotheek
     {
         #region Protected Methods
 
-        #region Protected Methods
-
         protected void Application_PreSendRequestHeaders(object sender, EventArgs e)
         {
             HttpContext.Current.Response.Headers.Remove("Server");
@@ -45,8 +43,6 @@ namespace Bibliotheek
                 LoadSuccessExpression = "window.jQuery"
             });
         }
-
-        #endregion Protected Methods
 
         #endregion Protected Methods
     }
