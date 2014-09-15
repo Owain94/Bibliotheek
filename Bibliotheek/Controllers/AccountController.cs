@@ -53,6 +53,11 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Activate(ActivateModel model)
         {
+            if (!System.Web.HttpContext.Current.Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var token = string.Empty;
             try
             {
