@@ -34,7 +34,12 @@
                             <ul id="menu-top-menu" class="clearfix">
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Over ons", "About", "Home")</li>
-                                <li>@Html.ActionLink("Registreren", "NewAccount", "Account")</li>
+                                @{
+                                    if (!HttpContext.Current.Request.IsAuthenticated)
+                                    {
+                                        <li>Login</li>
+                                    }
+                                }
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                             </ul>
                         </div>
