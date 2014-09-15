@@ -123,7 +123,7 @@ namespace Bibliotheek.Controllers
             if (model.Login())
             {
                 // If email and password are correct redirect user 
-                return RedirectToAction("Account", "Logged");
+                return RedirectToAction("LoggedIn", "Logged");
             }
             // Show error if the username and password are wrong 
             ViewBag.Error = "Deze inlog gegevens zijn niet bij ons bekend";

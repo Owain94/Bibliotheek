@@ -294,6 +294,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Logged\Account.cshtml" />
     <Content Include="Views\Logged\SignOut.cshtml" />
+    <Content Include="Views\Logged\LoggedIn.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,6 +23,19 @@ namespace Bibliotheek.Controllers
         }
 
         //
+        // GET: /Logged/LoggedIn
+        [EnableCompression]
+        public ActionResult LoggedIn()
+        {
+            // Redirect if the user isn't logged in 
+            if (!System.Web.HttpContext.Current.Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
+
+        //
         // GET: /Logged/SignOut
         [EnableCompression]
         public ActionResult SignOut()
