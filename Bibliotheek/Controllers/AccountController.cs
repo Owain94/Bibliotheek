@@ -3,6 +3,7 @@
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
+using System;
 using System.Web.Mvc;
 
 #endregion
@@ -12,6 +13,35 @@ namespace Bibliotheek.Controllers
     public class AccountController : Controller
     {
         #region Public Methods
+
+        //
+        // GET: /Account/Register 
+        [EnableCompression]
+        public ActionResult Activate()
+        {
+            var model = new ActivateModel();
+
+            var token = string.Empty;
+            try
+            {
+                token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
+            }
+            // ReSharper disable EmptyGeneralCatchClause 
+            catch (Exception)
+            // ReSharper restore EmptyGeneralCatchClause 
+            {
+                Response.Redirect("http://66164.ict-lab.nl/", true);
+            }
+
+            if (String.IsNullOrEmpty(token) || token.Length != 32)
+            {
+                Response.Redirect("http://66164.ict-lab.nl/", true);
+            }
+
+            model.GetValues(token);
+
+            return View(model);
+        }
 
         //
         // AJAX:
@@ -30,7 +60,6 @@ namespace Bibliotheek.Controllers
 
         //
         // GET: /Account/
-        [EnableCompression]
         public ActionResult NewAccount()
         {
             // Get view

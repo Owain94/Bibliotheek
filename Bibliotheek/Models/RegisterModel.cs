@@ -15,7 +15,7 @@ namespace Bibliotheek.Models
 
         [Required(ErrorMessage = "Voormaam is verplicht")]
         [Display(Name = "Voornaam:")]
-        public string FirstName { get; set; }
+        public string Firstname { get; set; }
 
         [Required(ErrorMessage = "Tussenvoegsel is verplicht")]
         [Display(Name = "Tussenvoegsel:")]
@@ -74,7 +74,7 @@ namespace Bibliotheek.Models
         public bool AddAccount()
         {
             // Run model through sql prevention and save them to vars 
-            var firstName = SqlInjection.SafeSqlLiteral(FirstName);
+            var firstName = SqlInjection.SafeSqlLiteral(Firstname);
             var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
             var lastName = SqlInjection.SafeSqlLiteral(Lastname);
             var mail = SqlInjection.SafeSqlLiteral(StringManipulation.ToLowerFast(Mail));
@@ -126,9 +126,12 @@ namespace Bibliotheek.Models
                 using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
                 {
                     // Bind parameters 
-                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt((firstName), pepper);
-                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = Crypt.StringEncrypt((inclusion), pepper);
-                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt((lastName), pepper);
+                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value =
+                        Crypt.StringEncrypt((firstName), pepper);
+                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value =
+                        Crypt.StringEncrypt((inclusion), pepper);
+                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value =
+                        Crypt.StringEncrypt((lastName), pepper);
                     insertCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
                     insertCommand.Parameters.Add("pepper", MySqlDbType.VarChar).Value = pepper;
 
@@ -138,7 +141,7 @@ namespace Bibliotheek.Models
                         insertCommand.ExecuteNonQuery();
 
                         // Send mail bail out if mail fails 
-                        return Message.SendMail(firstName, mail) == "False";
+                        return Message.SendMail(firstName, Mail) == "False";
                     }
                     catch (MySqlException)
                     {

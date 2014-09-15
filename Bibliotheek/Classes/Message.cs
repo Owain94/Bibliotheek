@@ -20,7 +20,7 @@ namespace Bibliotheek.Classes
         public static String SendMail(string name, string email)
         {
             const bool error = false;
-            var body = PopulateBody(name);
+            var body = PopulateBodyActivate(name, email);
             try
             {
                 var mailMessage = new MailMessage();
@@ -43,7 +43,7 @@ namespace Bibliotheek.Classes
         // <summary>
         // Send mail 
         // </summary>
-        public static String SendMail(String name, String email, String subject, String message)
+        public static String SendMail(string name, string email, string subject, string message)
         {
             const bool error = false;
             var body = PopulateBody(name, message);
@@ -73,14 +73,14 @@ namespace Bibliotheek.Classes
         // <summary>
         // Replace placeholders in the email template with vars 
         // </summary>
-        private static String PopulateBody(String naam)
+        private static String PopulateBodyActivate(string naam, string mail)
         {
             String body;
             String hash;
 
             using (var md5Hash = MD5.Create())
             {
-                hash = Crypt.GetMd5Hash(md5Hash, naam);
+                hash = Crypt.GetMd5Hash(md5Hash, mail);
             }
 
             using (var reader = new StreamReader(HttpContext.Current.Server.MapPath("~/EmailActivateTemplate.html")))
@@ -96,7 +96,7 @@ namespace Bibliotheek.Classes
         // <summary>
         // Replace placeholders in the email template with vars 
         // </summary>
-        private static String PopulateBody(String naam, String message)
+        private static String PopulateBody(string naam, string message)
         {
             String body;
 

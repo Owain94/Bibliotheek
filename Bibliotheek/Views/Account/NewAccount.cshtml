@@ -17,11 +17,11 @@
         FormMethod.Post, new { @id = "contact-form", @class = "row" }))
     {
         <div class="span2">
-            @Html.LabelFor(model => model.FirstName)
+            @Html.LabelFor(model => model.Firstname)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.FirstName, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => model.FirstName)
+            @Html.TextBoxFor(model => model.Firstname, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Firstname)
         </div>
 
         <div class="span2">

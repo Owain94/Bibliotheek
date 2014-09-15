@@ -133,6 +133,7 @@
     <Compile Include="Classes\DatabaseConnection.cs" />
     <Compile Include="Classes\Message.cs" />
     <Compile Include="Classes\SqlInjection.cs" />
+    <Compile Include="Classes\StringManipulation.cs" />
     <Compile Include="Classes\TimeConvert.cs" />
     <Compile Include="Classes\ValidateEmail.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivateModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -286,6 +288,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Properties\PublishProfiles\Thuis.pubxml" />
+    <Content Include="Views\Account\Activate.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
