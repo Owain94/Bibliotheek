@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Uitloggen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="span8 page-content">
+
+    <article class="type-page hentry clearfix">
+        <h1 class="post-title">
+            <a href="#">Uitloggen</a>
+        </h1>
+        <hr>
+    </article>
+    <div id="countdown">
+        U bent uitgelogd! U wordt over <span id="seconds">5</span> seconden doorverwezen.
+    </div>
+</div>
+
+<aside class="span4 page-sidebar">
+    @Html.Partial("_NewBook")
+</aside>
+
+@section scripts {
+    <script type="text/javascript">
+        var sTime = new Date().getTime();
+        var countDown = 5;
+
+        function UpdateTime() {
+            var cTime = new Date().getTime();
+            var diff = cTime - sTime;
+            var seconds = countDown - Math.floor(diff / 1000);
+            if (seconds >= 0) {
+                var minutes = Math.floor(seconds / 60);
+                seconds -= minutes * 60;
+                $("#seconds").text(seconds);
+            } else {
+                window.location.replace("/Home/Index");
+            }
+        }
+        UpdateTime();
+        var counter = setInterval(UpdateTime, 500);
+    </script>
+}

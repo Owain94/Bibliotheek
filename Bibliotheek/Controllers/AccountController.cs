@@ -23,7 +23,7 @@ namespace Bibliotheek.Controllers
             // Redirect is the user is logged in already 
             if (System.Web.HttpContext.Current.Request.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Account", "Logged");
             }
 
             var model = new ActivateModel
@@ -50,7 +50,7 @@ namespace Bibliotheek.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            if (!ActivateModel.CheckAccount(token)) return RedirectToAction("Index", "Home");
+            if (!ActivateModel.CheckAccount(token)) return RedirectToAction("Account", "Logged");
 
             // Get values form the database 
             model.GetValues(token);
@@ -64,7 +64,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Activate(ActivateModel model)
         {
-            var token = string.Empty;
+            string token;
             try
             {
                 // Get the token from the RouteData 
@@ -74,17 +74,17 @@ namespace Bibliotheek.Controllers
             catch (Exception)
             // ReSharper restore EmptyGeneralCatchClause 
             {
-                Response.Redirect("http://66164.ict-lab.nl/", true);
+                return RedirectToAction("Index", "Home");
             }
 
             if (String.IsNullOrEmpty(token) || token.Length != 32)
             {
-                Response.Redirect("http://66164.ict-lab.nl/", true);
+                return RedirectToAction("Index", "Home");
             }
             // Load in values from database 
             model.GetValues(token);
 
-            // Make Potal code upperCase, remove spaces and encrypt the string 
+            // Make Postal code upperCase, remove spaces and encrypt the string 
             model.PostalCode =
                 Crypt.StringEncrypt(
                     SqlInjection.SafeSqlLiteral(StringManipulation.ToUpperFast(model.PostalCode))
@@ -95,7 +95,7 @@ namespace Bibliotheek.Controllers
             if (!model.UpdateAccount()) return View("Error");
             // Make cookie for user 
             Cookies.MakeCookie(model.Mail, model.Id.ToString(CultureInfo.InvariantCulture));
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Account", "Logged");
         }
 
         //
@@ -106,7 +106,7 @@ namespace Bibliotheek.Controllers
             // Redirect is the user is logged in already 
             if (System.Web.HttpContext.Current.Request.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Account", "Logged");
             }
             // Get view 
             return View();
@@ -123,7 +123,7 @@ namespace Bibliotheek.Controllers
             if (model.Login())
             {
                 // If email and password are correct redirect user 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Account", "Logged");
             }
             // Show error if the username and password are wrong 
             ViewBag.Error = "Deze inlog gegevens zijn niet bij ons bekend";

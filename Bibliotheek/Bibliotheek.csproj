@@ -138,6 +138,7 @@
     <Compile Include="Classes\ValidateEmail.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoggedController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -291,6 +292,8 @@
     <None Include="Properties\PublishProfiles\Thuis.pubxml" />
     <Content Include="Views\Account\Activate.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Logged\Account.cshtml" />
+    <Content Include="Views\Logged\SignOut.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

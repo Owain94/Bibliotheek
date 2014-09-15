@@ -39,8 +39,18 @@
                                     {
                                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                                     }
+                                    else
+                                    {
+                                        <li>@Html.ActionLink("Account", "Account", "Logged")</li>
+                                    }
                                 }
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                @{
+                                    if (HttpContext.Current.Request.IsAuthenticated)
+                                    {
+                                        <li>@Html.ActionLink("Uitloggen", "SignOut", "Logged")</li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </nav>
