@@ -124,7 +124,6 @@ namespace Bibliotheek.Models
                                   "WHERE id = ?";
 
             var salt = Crypt.GetRandomSalt();
-
             using (var empConnection = DatabaseConnection.DatabaseConnect())
             {
                 using (var showresult = new MySqlCommand(result, empConnection))
@@ -142,7 +141,7 @@ namespace Bibliotheek.Models
                         DatabaseConnection.DatabaseOpen(empConnection);
                         showresult.ExecuteNonQuery();
                     }
-                    catch (MySqlException ex)
+                    catch (MySqlException)
                     {
                         return false;
                     }

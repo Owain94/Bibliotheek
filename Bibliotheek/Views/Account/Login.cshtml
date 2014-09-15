@@ -1,6 +1,6 @@
-﻿@model Bibliotheek.Models.ContactModel
+﻿@model Bibliotheek.Models.LoginModel
 @{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,49 +8,40 @@
 
     <article class="type-page hentry clearfix">
         <h1 class="post-title">
-            <a href="#">Contact</a>
+            <a href="#">Registreren</a>
         </h1>
         <hr>
     </article>
-    @using (Html.BeginForm("Contact", "Home",
+    @using (Html.BeginForm("Login", "Account",
         new { ViewBag.ReturnUrl },
         FormMethod.Post, new { @id = "contact-form", @class = "row" }))
     {
+
         <div class="span2">
-            @Html.LabelFor(model => model.Name)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Name, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => model.Name)
+            @ViewBag.Error
         </div>
-
+        
         <div class="span2">
             @Html.LabelFor(model => model.Email)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Email, new { @class = "input-xlarge", type = "email" })
+            @Html.TextBoxFor(model => model.Email, new { @class = "input-xlarge" })
             @Html.ValidationMessageFor(model => model.Email)
             <span id="returnData"></span>
         </div>
 
         <div class="span2">
-            @Html.LabelFor(model => model.Subject)
+            @Html.LabelFor(model => model.Password)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Subject, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => model.Subject)
-        </div>
-
-        <div class="span2">
-            @Html.LabelFor(model => model.Message)
-        </div>
-        <div class="span6">
-            @Html.TextAreaFor(model => model.Message, new { @class = "span6" })
-            @Html.ValidationMessageFor(model => model.Message)
+            @Html.PasswordFor(model => model.Password, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Password)
         </div>
 
         <div class="span6 offset2 bm30">
-            <input type="submit" name="submit" value="Verstuur" class="btn btn-inverse" disabled>
+            <input type="submit" name="submit" value="Voeg toe" class="btn btn-inverse" disabled>
             <img src="../../Images/loading.gif" id="contact-loader" alt="Laden...">
         </div>
 
@@ -60,14 +51,6 @@
 </div>
 
 <aside class="span4 page-sidebar">
-
-    <section class="widget">
-        <div class="support-widget">
-            <h3 class="title">Support</h3>
-            <p class="intro">Hebt u hulp nodig en hebt u het niet kunnen vinden op onze website? Neem gerust contact met ons op!</p>
-        </div>
-    </section>
-
     @Html.Partial("_NewBook")
 </aside>
 
@@ -87,7 +70,7 @@
         }
 
         function disableEnable() {
-            if ($("#returnData").html() == "" && $('#Email').val() != "" && $('#Message').val() != "" && $('#Subject').val() != "" && $('#Name').val() != "") {
+            if ($("#returnData").html() == "" && $('#Paassword').val() != "" && $('#Email').val() != "") {
                 $("input[type=submit]").removeAttr("disabled");
             } else {
                 $("input[type=submit]").attr("disabled", "disabled");
@@ -107,14 +90,6 @@
         });
 
         $('input').change(function () {
-            disableEnable();
-        });
-
-        $('textarea').keyup(function () {
-            disableEnable();
-        });
-
-        $('textarea').change(function () {
             disableEnable();
         });
     </script>

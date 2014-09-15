@@ -57,7 +57,7 @@ namespace Bibliotheek.Controllers
 
         //
         // AJAX:
-        // GET: /Home/UsernameCheck
+        // GET: /Home/MailCheck
         [EnableCompression]
         public string MailCheck(string input)
         {

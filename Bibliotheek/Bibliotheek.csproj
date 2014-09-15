@@ -143,6 +143,7 @@
     </Compile>
     <Compile Include="Models\ActivateModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -289,6 +290,7 @@
     </None>
     <None Include="Properties\PublishProfiles\Thuis.pubxml" />
     <Content Include="Views\Account\Activate.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

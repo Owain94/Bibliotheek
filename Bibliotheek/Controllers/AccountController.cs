@@ -16,7 +16,7 @@ namespace Bibliotheek.Controllers
         #region Public Methods
 
         //
-        // GET: /Account/Register 
+        // GET: /Account/Activate 
         [EnableCompression]
         public ActionResult Activate()
         {
@@ -48,7 +48,7 @@ namespace Bibliotheek.Controllers
         }
 
         //
-        // POST: /Account/Register 
+        // POST: /Account/Activate 
         [HttpPost]
         [EnableCompression]
         public ActionResult Activate(ActivateModel model)
@@ -76,7 +76,6 @@ namespace Bibliotheek.Controllers
                     SqlInjection.SafeSqlLiteral(StringManipulation.ToUpperFast(model.PostalCode))
                         .Replace(" ", string.Empty), model.Pepper);
             model.HouseNumber = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.HouseNumber), model.Pepper);
-            model.Password = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.Password), model.Pepper);
 
             if (!model.UpdateAccount()) return View("Error");
             Cookies.MakeCookie(model.Mail, model.Id.ToString(CultureInfo.InvariantCulture));
@@ -84,8 +83,33 @@ namespace Bibliotheek.Controllers
         }
 
         //
+        // GET: /Account/Login
+        [EnableCompression]
+        public ActionResult Login()
+        {
+            // Get view
+            return View();
+        }
+
+        //
+        // POST: /Account/Login
+        [HttpPost]
+        [EnableCompression]
+        public ActionResult Login(LoginModel model)
+        {
+            if (!ModelState.IsValid) return View();
+            if (model.Login())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            Response.Write(model.Login());
+            ViewBag.Error = "Deze inlog gegevens zijn niet bij ons bekend";
+            return View();
+        }
+
+        //
         // AJAX:
-        // GET: /Account/UsernameCheck
+        // GET: /Account/MailCheck
         [EnableCompression]
         public string MailCheck(string input)
         {
@@ -99,7 +123,7 @@ namespace Bibliotheek.Controllers
         }
 
         //
-        // GET: /Account/
+        // GET: /Account/NewAccount
         [EnableCompression]
         public ActionResult NewAccount()
         {
@@ -108,7 +132,7 @@ namespace Bibliotheek.Controllers
         }
 
         //
-        // POST: /Account/
+        // POST: /Account/NewAccount
         [HttpPost]
         [EnableCompression]
         public ActionResult NewAccount(RegisterModel model)

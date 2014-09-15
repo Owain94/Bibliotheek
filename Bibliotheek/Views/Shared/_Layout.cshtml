@@ -37,7 +37,7 @@
                                 @{
                                     if (!HttpContext.Current.Request.IsAuthenticated)
                                     {
-                                        <li>Login</li>
+                                        <li>@Html.ActionLink("Login", "Login", "Account")</li>
                                     }
                                 }
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
