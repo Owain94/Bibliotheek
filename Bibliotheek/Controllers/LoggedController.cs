@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
+﻿#region
+
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
+using System.Web.Mvc;
+using System.Web.Security;
+
+#endregion
 
 namespace Bibliotheek.Controllers
 {
     public class LoggedController : Controller
     {
-        // GET: Logged
+        #region Public Methods
+
+        // GET: Logged 
         [EnableCompression]
         public ActionResult Account()
         {
@@ -24,24 +26,8 @@ namespace Bibliotheek.Controllers
             return View();
         }
 
-        private void VerifyAdminRights()
-        {
-            var user = User.Identity as FormsIdentity;
-            // ReSharper disable PossibleNullReferenceException
-            var ticket = user.Ticket;
-            // ReSharper restore PossibleNullReferenceException
-            if (CheckAdminRights.AdminRights(ticket.UserData))
-            {
-                Session["Admin"] = "true";
-            }
-            else
-            {
-                Session["Admin"] = "false";
-            }
-        }
-
         //
-        // GET: /Logged/LoggedIn
+        // GET: /Logged/LoggedIn 
         [EnableCompression]
         public ActionResult LoggedIn()
         {
@@ -55,7 +41,7 @@ namespace Bibliotheek.Controllers
         }
 
         //
-        // GET: /Logged/SignOut
+        // GET: /Logged/SignOut 
         [EnableCompression]
         public ActionResult SignOut()
         {
@@ -64,5 +50,27 @@ namespace Bibliotheek.Controllers
 
             return View();
         }
+
+        #endregion Public Methods
+
+        #region Private Methods
+
+        private void VerifyAdminRights()
+        {
+            var user = User.Identity as FormsIdentity;
+            // ReSharper disable PossibleNullReferenceException 
+            var ticket = user.Ticket;
+            // ReSharper restore PossibleNullReferenceException 
+            if (CheckAdminRights.AdminRights(ticket.UserData))
+            {
+                Session["Admin"] = "true";
+            }
+            else
+            {
+                Session["Admin"] = "false";
+            }
+        }
+
+        #endregion Private Methods
     }
 }
