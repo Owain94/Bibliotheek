@@ -42,8 +42,20 @@
                                     else
                                     {
                                         <li>@Html.ActionLink("Account", "Account", "Logged")</li>
+                                        if (ReferenceEquals(Session["Admin"], "true"))
+                                        {
+                                            <li>@Html.ActionLink("Gebruikers", "Account", "Logged")</li>
+
+                                            <li>
+                                                <a href="#">Gebruikers</a>
+                                                <ul class="sub-menu">
+                                                    <li>@Html.ActionLink("Gebruiker toevoegen", "NewAccount", "Account")</li>
+                                                    <li><a href="#">Bla</a></li>
+                                                </ul>
+                                            </li>
+                                        }
                                     }
-                                }
+}
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 @{
                                     if (HttpContext.Current.Request.IsAuthenticated)

@@ -122,6 +122,10 @@ namespace Bibliotheek.Controllers
             if (!ModelState.IsValid) return View();
             if (model.Login())
             {
+                if (model.Admin == 1)
+                {
+                    Session["Admin"] = "true";
+                }
                 // If email and password are correct redirect user 
                 return RedirectToAction("LoggedIn", "Logged");
             }

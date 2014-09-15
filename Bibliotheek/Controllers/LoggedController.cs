@@ -40,6 +40,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult SignOut()
         {
+            Session["Admin"] = "false";
             FormsAuthentication.SignOut();
 
             return View();

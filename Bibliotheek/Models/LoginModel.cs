@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -23,6 +24,8 @@ namespace Bibliotheek.Models
         [Display(Name = "Wachtwoord:")]
         public string Password { get; set; }
 
+        public int Admin { get; private set; }
+
         #endregion Public Properties
 
         public bool Login()
@@ -34,7 +37,7 @@ namespace Bibliotheek.Models
             var savedId = "";
 
             // MySQL query 
-            const string result = "SELECT id, password, salt " +
+            const string result = "SELECT id, password, salt, admin " +
                                   "FROM meok2_bibliotheek_gebruikers " +
                                   "WHERE email = ?";
 
@@ -56,6 +59,7 @@ namespace Bibliotheek.Models
                                 savedId = myDataReader.GetValue(1).ToString();
                                 savedPassword = myDataReader.GetString(1);
                                 savedSalt = myDataReader.GetString(2);
+                                Admin = Convert.ToInt16(myDataReader.GetValue(3));
                             }
                         }
 
