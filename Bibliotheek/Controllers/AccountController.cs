@@ -41,7 +41,7 @@ namespace Bibliotheek.Controllers
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }
-
+            if (!ActivateModel.CheckAccount(token)) return RedirectToAction("Index", "Home");
             model.GetValues(token);
 
             return View(model);

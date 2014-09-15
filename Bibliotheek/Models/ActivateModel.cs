@@ -57,7 +57,55 @@ namespace Bibliotheek.Models
         #region Public Methods
 
         // <summary>
-        // Check if email is in the database already 
+        // Check if the account is already activated
+        // </summary>
+        public static bool CheckAccount(string token)
+        {
+            const string result = "SELECT id, salt, email " +
+                                  "FROM meok2_bibliotheek_gebruikers";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var showresult = new MySqlCommand(result, empConnection))
+                {
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        using (var reader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (reader.Read())
+                            {
+                                using (var md5Hash = MD5.Create())
+                                {
+                                    if (!Crypt.VerifyMd5Hash(md5Hash, reader.GetValue(2).ToString(), token)) continue;
+
+                                    var id = reader.GetValue(0).ToString();
+
+                                    if (id == "-1") continue;
+                                    if (!String.IsNullOrEmpty(reader.GetValue(1).ToString()))
+                                    {
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // ReSharper disable EmptyGeneralCatchClause 
+                    catch (Exception)
+                    // ReSharper restore EmptyGeneralCatchClause 
+                    {
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return true;
+        }
+
+        // <summary>
+        // Get values for the giving account
         // </summary>
         public void GetValues(string token)
         {
@@ -112,6 +160,9 @@ namespace Bibliotheek.Models
             }
         }
 
+        // <summary>
+        // Update account from the activate page
+        // </summary>
         public bool UpdateAccount()
         {
             const string result = "UPDATE meok2_bibliotheek_gebruikers " +
