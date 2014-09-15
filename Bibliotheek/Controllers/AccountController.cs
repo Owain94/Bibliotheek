@@ -1,13 +1,10 @@
 ﻿#region
 
-using System.Drawing.Imaging;
-using System.Web.Security;
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
 using System;
 using System.Web.Mvc;
-using MySql.Data.MySqlClient;
 
 #endregion
 
@@ -18,7 +15,7 @@ namespace Bibliotheek.Controllers
         #region Public Methods
 
         //
-        // GET: /Account/Register
+        // GET: /Account/Register 
         [EnableCompression]
         public ActionResult Activate()
         {
@@ -50,7 +47,7 @@ namespace Bibliotheek.Controllers
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Account/Register 
         [HttpPost]
         [EnableCompression]
         public ActionResult Activate(ActivateModel model)
@@ -60,9 +57,9 @@ namespace Bibliotheek.Controllers
             {
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-                // ReSharper disable EmptyGeneralCatchClause 
+            // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-                // ReSharper restore EmptyGeneralCatchClause 
+            // ReSharper restore EmptyGeneralCatchClause 
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }

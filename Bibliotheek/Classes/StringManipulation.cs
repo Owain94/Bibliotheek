@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace Bibliotheek.Classes
 {
     public static class StringManipulation
     {
         /// <summary>
-        /// Convert DateTime to MySql date
+        /// Convert DateTime to MySql date 
         /// </summary>
         public static string DateTimeToMySql(DateTime value)
         {
@@ -28,9 +29,9 @@ namespace Bibliotheek.Classes
             for (var i = 0; i < output.Length; i++)
             {
                 if (output[i] >= 'A' &&
-                output[i] <= 'Z')
+                    output[i] <= 'Z')
                 {
-                    output[i] = (char)(output[i] + 32);
+                    output[i] = (char) (output[i] + 32);
                 }
             }
             return new string(output);
@@ -45,9 +46,9 @@ namespace Bibliotheek.Classes
             for (var i = 0; i < output.Length; i++)
             {
                 if (output[i] >= 'a' &&
-                output[i] <= 'z')
+                    output[i] <= 'z')
                 {
-                    output[i] = (char)(output[i] - 32);
+                    output[i] = (char) (output[i] - 32);
                 }
             }
             return new string(output);

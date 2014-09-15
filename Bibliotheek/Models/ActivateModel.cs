@@ -1,6 +1,5 @@
 ﻿#region
 
-using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System;
