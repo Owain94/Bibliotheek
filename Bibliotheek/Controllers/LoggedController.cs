@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Bibliotheek.Attributes;
+using Bibliotheek.Classes;
 
 namespace Bibliotheek.Controllers
 {
@@ -19,7 +20,24 @@ namespace Bibliotheek.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            VerifyAdminRights();
             return View();
+        }
+
+        private void VerifyAdminRights()
+        {
+            var user = User.Identity as FormsIdentity;
+            // ReSharper disable PossibleNullReferenceException
+            var ticket = user.Ticket;
+            // ReSharper restore PossibleNullReferenceException
+            if (CheckAdminRights.AdminRights(ticket.UserData))
+            {
+                Session["Admin"] = "true";
+            }
+            else
+            {
+                Session["Admin"] = "false";
+            }
         }
 
         //
@@ -32,6 +50,7 @@ namespace Bibliotheek.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            VerifyAdminRights();
             return View();
         }
 
