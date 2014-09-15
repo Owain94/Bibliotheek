@@ -77,7 +77,7 @@ namespace Bibliotheek.Models
             var firstName = SqlInjection.SafeSqlLiteral(FirstName);
             var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
             var lastName = SqlInjection.SafeSqlLiteral(Lastname);
-            var mail = SqlInjection.SafeSqlLiteral(Mail.ToLower());
+            var mail = SqlInjection.SafeSqlLiteral(StringManipulation.ToLowerFast(Mail));
             var pepper = Crypt.GetRandomSalt();
 
             // Validate email using regex since HTML5 validation doesn't handle some cases 

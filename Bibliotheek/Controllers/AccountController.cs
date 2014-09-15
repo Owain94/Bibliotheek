@@ -19,7 +19,13 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public string MailCheck(string input)
         {
-            return RegisterModel.CheckMail(SqlInjection.SafeSqlLiteral(input)) > 0 ? "Deze email is al bezet" : "";
+            if (ValidateEmail.IsValidEmail(input))
+            {
+                return RegisterModel.CheckMail(SqlInjection.SafeSqlLiteral(StringManipulation.ToLowerFast(input))) > 0
+                    ? "Deze email is al bezet"
+                    : "Deze email is nog niet bezet";
+            }
+            return "Dit is geen geldig email adres";
         }
 
         //
