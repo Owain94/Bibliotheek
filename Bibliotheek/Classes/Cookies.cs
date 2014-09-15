@@ -15,9 +15,9 @@ namespace Bibliotheek.Classes
         // <summary>
         // Create a HttpOnly cookie 
         // </summary>
-        public static void MakeCookie(string name, string savedId)
+        public static void MakeCookie(string email, string savedId)
         {
-            var tkt = new FormsAuthenticationTicket(1, name, DateTime.Now,
+            var tkt = new FormsAuthenticationTicket(1, email, DateTime.Now,
                 DateTime.Now.AddMinutes((44640)), false, savedId);
             var cookiestr = FormsAuthentication.Encrypt(tkt);
             var ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr)
@@ -26,7 +26,7 @@ namespace Bibliotheek.Classes
                 Path = FormsAuthentication.FormsCookiePath,
                 HttpOnly = true
             };
-            FormsAuthentication.SetAuthCookie(name, false);
+            FormsAuthentication.SetAuthCookie(email, false);
             HttpContext.Current.Response.Cookies.Add(ck);
         }
 

@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Globalization;
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
@@ -77,11 +78,9 @@ namespace Bibliotheek.Controllers
             model.HouseNumber = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.HouseNumber), model.Pepper);
             model.Password = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.Password), model.Pepper);
 
-            if (model.UpdateAccount())
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            return View("Error");
+            if (!model.UpdateAccount()) return View("Error");
+            Cookies.MakeCookie(model.Mail, model.Id.ToString(CultureInfo.InvariantCulture));
+            return RedirectToAction("Index", "Home");
         }
 
         //
