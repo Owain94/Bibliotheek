@@ -40,6 +40,7 @@ namespace Bibliotheek.Models
         public static int CheckMail(string mail)
         {
             var count = 0;
+            // MySQL query
             const string countStatement = "SELECT COUNT(*) " +
                                           "FROM meok2_bibliotheek_gebruikers " +
                                           "WHERE email = ?";
@@ -54,6 +55,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         count = Convert.ToInt32(countCommand.ExecuteScalar());
                     }
                     catch (MySqlException)
@@ -83,7 +85,7 @@ namespace Bibliotheek.Models
             // Validate email using regex since HTML5 validation doesn't handle some cases 
             if (!ValidateEmail.IsValidEmail(mail)) return false;
 
-            // Check if email doesn't exist already 
+            // MySQL query
             const string countStatement = "SELECT COUNT(*) " +
                                           "FROM meok2_bibliotheek_gebruikers " +
                                           "WHERE email = ?";
@@ -98,6 +100,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         count = Convert.ToInt32(countCommand.ExecuteScalar());
                     }
                     catch (MySqlException)
@@ -138,6 +141,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         insertCommand.ExecuteNonQuery();
 
                         // Send mail bail out if mail fails 

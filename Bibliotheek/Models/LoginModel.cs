@@ -32,6 +32,7 @@ namespace Bibliotheek.Models
             var savedSalt = "";
             var savedId = "";
 
+            // MySQL query
             const string result = "SELECT id, password, salt " +
                                   "FROM meok2_bibliotheek_gebruikers " +
                                   "WHERE email = ?";
@@ -40,20 +41,24 @@ namespace Bibliotheek.Models
             {
                 using (var showresult = new MySqlCommand(result, empConnection))
                 {
+                    // Bind parameters 
                     showresult.Parameters.Add("email", MySqlDbType.VarChar).Value = email;
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         using (var myDataReader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
                         {
                             while (myDataReader.Read())
                             {
+                                // Save the values
                                 savedId = myDataReader.GetValue(1).ToString();
                                 savedPassword = myDataReader.GetString(1);
                                 savedSalt = myDataReader.GetString(2);
                             }
                         }
 
+                        // Hash the password and check if the hash is the same as the saved password
                         if (Crypt.ValidatePassword(password, savedPassword, savedSalt))
                         {
                             Cookies.MakeCookie(email, savedId);
@@ -62,6 +67,7 @@ namespace Bibliotheek.Models
                     }
                     catch (MySqlException)
                     {
+                        // MySqlException bail out 
                         return false;
                     }
                     finally

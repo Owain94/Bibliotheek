@@ -61,6 +61,7 @@ namespace Bibliotheek.Models
         // </summary>
         public static bool CheckAccount(string token)
         {
+            // MySQL query
             const string result = "SELECT id, salt, email " +
                                   "FROM meok2_bibliotheek_gebruikers";
 
@@ -71,17 +72,20 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         using (var reader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
                         {
                             while (reader.Read())
                             {
                                 using (var md5Hash = MD5.Create())
                                 {
+                                    // Check if the MD5 hash mathes
                                     if (!Crypt.VerifyMd5Hash(md5Hash, reader.GetValue(2).ToString(), token)) continue;
 
                                     var id = reader.GetValue(0).ToString();
 
                                     if (id == "-1") continue;
+                                    // Check if salt is not empty or not null
                                     if (!String.IsNullOrEmpty(reader.GetValue(1).ToString()))
                                     {
                                         return false;
@@ -109,6 +113,7 @@ namespace Bibliotheek.Models
         // </summary>
         public void GetValues(string token)
         {
+            // MySQL query
             const string result = "SELECT id, voornaam, tussenvoegsel, achternaam, email, pepper " +
                                   "FROM meok2_bibliotheek_gebruikers";
 
@@ -119,18 +124,21 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         using (var reader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
                         {
                             while (reader.Read())
                             {
+                                // Check if the MD5 hash mathes
                                 using (var md5Hash = MD5.Create())
                                 {
                                     if (!Crypt.VerifyMd5Hash(md5Hash, reader.GetValue(4).ToString(), token)) continue;
-
+                                    // Save the values
                                     var id = reader.GetValue(0).ToString();
                                     var pepper = reader.GetValue(5).ToString();
 
                                     if (id == "-1") continue;
+                                    // Save values to the model
                                     Id = Convert.ToInt16(id);
                                     Firstname =
                                         SqlInjection.SafeSqlLiteralRevert(
@@ -148,9 +156,10 @@ namespace Bibliotheek.Models
                         }
                     }
                     // ReSharper disable EmptyGeneralCatchClause 
-                    catch (Exception)
+                    catch (MySqlException)
                     // ReSharper restore EmptyGeneralCatchClause 
                     {
+                        // MySqlException bail out 
                     }
                     finally
                     {
@@ -165,6 +174,7 @@ namespace Bibliotheek.Models
         // </summary>
         public bool UpdateAccount()
         {
+            // MySQL query
             const string result = "UPDATE meok2_bibliotheek_gebruikers " +
                                   "SET postcode = ?, " +
                                   "huisnummer = ?, " +
@@ -179,6 +189,7 @@ namespace Bibliotheek.Models
             {
                 using (var showresult = new MySqlCommand(result, empConnection))
                 {
+                    // Bind parameters 
                     showresult.Parameters.Add("postcode", MySqlDbType.VarChar).Value = PostalCode;
                     showresult.Parameters.Add("huisnummer", MySqlDbType.VarChar).Value = HouseNumber;
                     showresult.Parameters.Add("geslacht", MySqlDbType.VarChar).Value = Gender;
@@ -190,10 +201,12 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command
                         showresult.ExecuteNonQuery();
                     }
                     catch (MySqlException)
                     {
+                        // MySqlException bail out 
                         return false;
                     }
                     finally

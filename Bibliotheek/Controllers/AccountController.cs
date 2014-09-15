@@ -20,6 +20,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Activate()
         {
+            // Redirect is the user is logged in already
             if (System.Web.HttpContext.Current.Request.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -27,26 +28,31 @@ namespace Bibliotheek.Controllers
 
             var model = new ActivateModel
             {
+                // Set default
                 Gender = 0
             };
 
-            var token = string.Empty;
+            string token;
             try
             {
+                // Get the token from the RouteData
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
             // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
             // ReSharper restore EmptyGeneralCatchClause 
             {
-                Response.Redirect("http://66164.ict-lab.nl/", true);
+                return RedirectToAction("Index", "Home");
             }
 
+            // Redirect if the token is invalid or missing
             if (String.IsNullOrEmpty(token) || token.Length != 32)
             {
-                Response.Redirect("http://66164.ict-lab.nl/", true);
+                return RedirectToAction("Index", "Home");
             }
             if (!ActivateModel.CheckAccount(token)) return RedirectToAction("Index", "Home");
+
+            // Get values form the database
             model.GetValues(token);
 
             return View(model);
@@ -62,6 +68,7 @@ namespace Bibliotheek.Controllers
             var token = string.Empty;
             try
             {
+                // Get the token from the RouteData
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
             // ReSharper disable EmptyGeneralCatchClause 
@@ -75,15 +82,19 @@ namespace Bibliotheek.Controllers
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }
-
+            // Load in values from database
             model.GetValues(token);
+
+            // Make Potal code upperCase, remove spaces and encrypt the string
             model.PostalCode =
                 Crypt.StringEncrypt(
                     SqlInjection.SafeSqlLiteral(StringManipulation.ToUpperFast(model.PostalCode))
                         .Replace(" ", string.Empty), model.Pepper);
             model.HouseNumber = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.HouseNumber), model.Pepper);
 
+            // If UpdateAccount fails show error page
             if (!model.UpdateAccount()) return View("Error");
+            // Make cookie for user
             Cookies.MakeCookie(model.Mail, model.Id.ToString(CultureInfo.InvariantCulture));
             return RedirectToAction("Index", "Home");
         }
@@ -93,6 +104,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Login()
         {
+            // Redirect is the user is logged in already
             if (System.Web.HttpContext.Current.Request.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Home");
@@ -107,12 +119,14 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Login(LoginModel model)
         {
+            // If modelState is invalid return the View
             if (!ModelState.IsValid) return View();
             if (model.Login())
             {
+                // If email and password are correct redirect user
                 return RedirectToAction("Index", "Home");
             }
-            Response.Write(model.Login());
+            // Show error if the username and password are wrong
             ViewBag.Error = "Deze inlog gegevens zijn niet bij ons bekend";
             return View();
         }
@@ -123,6 +137,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public string MailCheck(string input)
         {
+            // Validate email
             if (ValidateEmail.IsValidEmail(input))
             {
                 return RegisterModel.CheckMail(SqlInjection.SafeSqlLiteral(StringManipulation.ToLowerFast(input))) > 0
