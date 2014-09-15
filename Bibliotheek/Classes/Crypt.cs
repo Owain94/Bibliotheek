@@ -60,7 +60,7 @@ namespace Bibliotheek.Classes
         {
             var cipherBytes = Convert.FromBase64String(cipherText);
             var pdb = new PasswordDeriveBytes(password,
-                new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                new byte[] { 0x51, 0x42, 0x69, 0x2e, 0x4f, 0x3a, 0x56, 0x59, 0x16, 0x3c, 0xcd, 0x4d, 0x36 });
 #pragma warning disable 618
             var decryptedData = StringDecrypt(cipherBytes, pdb.GetBytes(32), pdb.GetBytes(16));
 #pragma warning restore 618
@@ -75,7 +75,7 @@ namespace Bibliotheek.Classes
         {
             var clearBytes = Encoding.Unicode.GetBytes(clearText);
             var pdb = new PasswordDeriveBytes(password,
-                new byte[] { 0x49, 0x76, 0x61, 0x6e, 0x20, 0x4d, 0x65, 0x64, 0x76, 0x65, 0x64, 0x65, 0x76 });
+                new byte[] { 0x51, 0x42, 0x69, 0x2e, 0x4f, 0x3a, 0x56, 0x59, 0x16, 0x3c, 0xcd, 0x4d, 0x36 });
 #pragma warning disable 618
             var encryptedData = StringEncrypt(clearBytes, pdb.GetBytes(32), pdb.GetBytes(16));
 #pragma warning restore 618

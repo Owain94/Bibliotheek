@@ -78,6 +78,7 @@ namespace Bibliotheek.Models
             var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
             var lastName = SqlInjection.SafeSqlLiteral(Lastname);
             var mail = SqlInjection.SafeSqlLiteral(Mail);
+            var pepper = Crypt.GetRandomSalt();
 
             // Validate email using regex since HTML5 validation doesn't handle some cases 
             if (!ValidateEmail.IsValidEmail(mail)) return false;
@@ -119,16 +120,17 @@ namespace Bibliotheek.Models
 
                 // Insert user in the database 
                 const string insertStatement = "INSERT INTO meok2_bibliotheek_gebruikers " +
-                                               "(voornaam, tussenvoegsel, achternaam, email) " +
-                                               "VALUES (?, ?, ?, ?)";
+                                               "(voornaam, tussenvoegsel, achternaam, email, pepper) " +
+                                               "VALUES (?, ?, ?, ?, ?)";
 
                 using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
                 {
                     // Bind parameters 
-                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = firstName;
-                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = inclusion;
-                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = lastName;
+                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(firstName), pepper);
+                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(inclusion), pepper);
+                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(lastName), pepper);
                     insertCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
+                    insertCommand.Parameters.Add("pepper", MySqlDbType.VarChar).Value = pepper;
 
                     try
                     {
