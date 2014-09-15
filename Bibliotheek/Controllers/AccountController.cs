@@ -92,6 +92,10 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Login()
         {
+            if (System.Web.HttpContext.Current.Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // Get view
             return View();
         }
