@@ -77,7 +77,7 @@ namespace Bibliotheek.Models
             var firstName = SqlInjection.SafeSqlLiteral(FirstName);
             var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
             var lastName = SqlInjection.SafeSqlLiteral(Lastname);
-            var mail = SqlInjection.SafeSqlLiteral(Mail);
+            var mail = SqlInjection.SafeSqlLiteral(ToLower(Mail));
             var pepper = Crypt.GetRandomSalt();
 
             // Validate email using regex since HTML5 validation doesn't handle some cases 
@@ -126,9 +126,9 @@ namespace Bibliotheek.Models
                 using (var insertCommand = new MySqlCommand(insertStatement, empConnection))
                 {
                     // Bind parameters 
-                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(firstName), pepper);
-                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(inclusion), pepper);
-                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(lastName), pepper);
+                    insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(firstName), pepper);
+                    insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(inclusion), pepper);
+                    insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value = Crypt.StringEncrypt(lastName), pepper);
                     insertCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
                     insertCommand.Parameters.Add("pepper", MySqlDbType.VarChar).Value = pepper;
 
