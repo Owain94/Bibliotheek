@@ -15,22 +15,22 @@ namespace Bibliotheek.Models
     {
         #region Public Properties
 
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         [Display(Name = "Voornaam:")]
-        public string Firstname { get; set; }
+        public string Firstname { get; private set; }
 
         [Display(Name = "Tussenvoegsel:")]
-        public string Inclusion { get; set; }
+        public string Inclusion { get; private set; }
 
         [Display(Name = "Achternaam:")]
-        public string Lastname { get; set; }
+        public string Lastname { get; private set; }
 
         [DataType(DataType.EmailAddress)]
         [Display(Name = "Email:")]
-        public string Mail { get; set; }
+        public string Mail { get; private set; }
 
-        public string Pepper { get; set; }
+        public string Pepper { get; private set; }
 
         [Required(ErrorMessage = "Postcode is verplicht")]
         [Display(Name = "Postcode:")]
@@ -57,11 +57,11 @@ namespace Bibliotheek.Models
         #region Public Methods
 
         // <summary>
-        // Check if the account is already activated
+        // Check if the account is already activated 
         // </summary>
         public static bool CheckAccount(string token)
         {
-            // MySQL query
+            // MySQL query 
             const string result = "SELECT id, salt, email " +
                                   "FROM meok2_bibliotheek_gebruikers";
 
@@ -72,20 +72,20 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         using (var reader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
                         {
                             while (reader.Read())
                             {
                                 using (var md5Hash = MD5.Create())
                                 {
-                                    // Check if the MD5 hash mathes
+                                    // Check if the MD5 hash mathes 
                                     if (!Crypt.VerifyMd5Hash(md5Hash, reader.GetValue(2).ToString(), token)) continue;
 
                                     var id = reader.GetValue(0).ToString();
 
                                     if (id == "-1") continue;
-                                    // Check if salt is not empty or not null
+                                    // Check if salt is not empty or not null 
                                     if (!String.IsNullOrEmpty(reader.GetValue(1).ToString()))
                                     {
                                         return false;
@@ -94,9 +94,7 @@ namespace Bibliotheek.Models
                             }
                         }
                     }
-                    // ReSharper disable EmptyGeneralCatchClause 
-                    catch (Exception)
-                    // ReSharper restore EmptyGeneralCatchClause 
+                    catch (MySqlException)
                     {
                     }
                     finally
@@ -109,11 +107,11 @@ namespace Bibliotheek.Models
         }
 
         // <summary>
-        // Get values for the giving account
+        // Get values for the giving account 
         // </summary>
         public void GetValues(string token)
         {
-            // MySQL query
+            // MySQL query 
             const string result = "SELECT id, voornaam, tussenvoegsel, achternaam, email, pepper " +
                                   "FROM meok2_bibliotheek_gebruikers";
 
@@ -124,21 +122,21 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         using (var reader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
                         {
                             while (reader.Read())
                             {
-                                // Check if the MD5 hash mathes
+                                // Check if the MD5 hash mathes 
                                 using (var md5Hash = MD5.Create())
                                 {
                                     if (!Crypt.VerifyMd5Hash(md5Hash, reader.GetValue(4).ToString(), token)) continue;
-                                    // Save the values
+                                    // Save the values 
                                     var id = reader.GetValue(0).ToString();
                                     var pepper = reader.GetValue(5).ToString();
 
                                     if (id == "-1") continue;
-                                    // Save values to the model
+                                    // Save values to the model 
                                     Id = Convert.ToInt16(id);
                                     Firstname =
                                         SqlInjection.SafeSqlLiteralRevert(
@@ -155,9 +153,7 @@ namespace Bibliotheek.Models
                             }
                         }
                     }
-                    // ReSharper disable EmptyGeneralCatchClause 
                     catch (MySqlException)
-                    // ReSharper restore EmptyGeneralCatchClause 
                     {
                         // MySqlException bail out 
                     }
@@ -170,11 +166,11 @@ namespace Bibliotheek.Models
         }
 
         // <summary>
-        // Update account from the activate page
+        // Update account from the activate page 
         // </summary>
         public bool UpdateAccount()
         {
-            // MySQL query
+            // MySQL query 
             const string result = "UPDATE meok2_bibliotheek_gebruikers " +
                                   "SET postcode = ?, " +
                                   "huisnummer = ?, " +
@@ -201,7 +197,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         showresult.ExecuteNonQuery();
                     }
                     catch (MySqlException)

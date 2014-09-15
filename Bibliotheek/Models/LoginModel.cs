@@ -1,9 +1,9 @@
 ﻿#region
 
-using System.ComponentModel.DataAnnotations;
-using System.Data;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 
 #endregion
 
@@ -11,6 +11,7 @@ namespace Bibliotheek.Models
 {
     public class LoginModel
     {
+
         #region Public Properties
 
         [Display(Name = "Email: ")]
@@ -32,7 +33,7 @@ namespace Bibliotheek.Models
             var savedSalt = "";
             var savedId = "";
 
-            // MySQL query
+            // MySQL query 
             const string result = "SELECT id, password, salt " +
                                   "FROM meok2_bibliotheek_gebruikers " +
                                   "WHERE email = ?";
@@ -46,19 +47,19 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         using (var myDataReader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
                         {
                             while (myDataReader.Read())
                             {
-                                // Save the values
+                                // Save the values 
                                 savedId = myDataReader.GetValue(1).ToString();
                                 savedPassword = myDataReader.GetString(1);
                                 savedSalt = myDataReader.GetString(2);
                             }
                         }
 
-                        // Hash the password and check if the hash is the same as the saved password
+                        // Hash the password and check if the hash is the same as the saved password 
                         if (Crypt.ValidatePassword(password, savedPassword, savedSalt))
                         {
                             Cookies.MakeCookie(email, savedId);

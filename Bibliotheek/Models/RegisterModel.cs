@@ -11,6 +11,7 @@ namespace Bibliotheek.Models
 {
     public class RegisterModel
     {
+
         #region Public Properties
 
         [Required(ErrorMessage = "Voormaam is verplicht")]
@@ -40,7 +41,7 @@ namespace Bibliotheek.Models
         public static int CheckMail(string mail)
         {
             var count = 0;
-            // MySQL query
+            // MySQL query 
             const string countStatement = "SELECT COUNT(*) " +
                                           "FROM meok2_bibliotheek_gebruikers " +
                                           "WHERE email = ?";
@@ -55,7 +56,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         count = Convert.ToInt32(countCommand.ExecuteScalar());
                     }
                     catch (MySqlException)
@@ -85,7 +86,7 @@ namespace Bibliotheek.Models
             // Validate email using regex since HTML5 validation doesn't handle some cases 
             if (!ValidateEmail.IsValidEmail(mail)) return false;
 
-            // MySQL query
+            // MySQL query 
             const string countStatement = "SELECT COUNT(*) " +
                                           "FROM meok2_bibliotheek_gebruikers " +
                                           "WHERE email = ?";
@@ -100,7 +101,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         count = Convert.ToInt32(countCommand.ExecuteScalar());
                     }
                     catch (MySqlException)
@@ -141,7 +142,7 @@ namespace Bibliotheek.Models
                     try
                     {
                         DatabaseConnection.DatabaseOpen(empConnection);
-                        // Execute command
+                        // Execute command 
                         insertCommand.ExecuteNonQuery();
 
                         // Send mail bail out if mail fails 
