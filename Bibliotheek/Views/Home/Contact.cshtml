@@ -13,14 +13,14 @@
         <hr>
     </article>
     @using (Html.BeginForm("Contact", "Home",
-        new {ViewBag.ReturnUrl},
-        FormMethod.Post, new {@id = "contact-form", @class = "row"}))
+        new { ViewBag.ReturnUrl },
+        FormMethod.Post, new { @id = "contact-form", @class = "row" }))
     {
         <div class="span2">
             @Html.LabelFor(model => model.Name)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Name, new {@class = "input-xlarge"})
+            @Html.TextBoxFor(model => model.Name, new { @class = "input-xlarge" })
             @Html.ValidationMessageFor(model => model.Name)
         </div>
 
@@ -28,15 +28,16 @@
             @Html.LabelFor(model => model.Email)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Email, new {@class = "input-xlarge", type = "email"})
+            @Html.TextBoxFor(model => model.Email, new { @class = "input-xlarge", type = "email" })
             @Html.ValidationMessageFor(model => model.Email)
+            <span id="returnData"></span>
         </div>
 
         <div class="span2">
             @Html.LabelFor(model => model.Subject)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Subject, new {@class = "input-xlarge"})
+            @Html.TextBoxFor(model => model.Subject, new { @class = "input-xlarge" })
             @Html.ValidationMessageFor(model => model.Subject)
         </div>
 
@@ -44,12 +45,12 @@
             @Html.LabelFor(model => model.Message)
         </div>
         <div class="span6">
-            @Html.TextAreaFor(model => model.Message, new {@class = "span6"})
+            @Html.TextAreaFor(model => model.Message, new { @class = "span6" })
             @Html.ValidationMessageFor(model => model.Message)
         </div>
 
         <div class="span6 offset2 bm30">
-            <input type="submit" name="submit" value="Verstuur" class="btn btn-inverse">
+            <input type="submit" name="submit" value="Verstuur" class="btn btn-inverse" disabled>
             <img src="../../Images/loading.gif" id="contact-loader" alt="Laden...">
         </div>
 
@@ -69,3 +70,52 @@
 
     @Html.Partial("_NewBook")
 </aside>
+
+@section scripts {
+    <script type="text/javascript">
+        function checkMail() {
+            var url = "/Home/MailCheck";
+            var mail = $('#Email').val();
+            $.get(url, { input: mail }, function (data) {
+                if (data == "true") {
+                    $("#returnData").html("");
+                } else {
+                    $("#returnData").html("Dit is geen geldig email adres");
+                }
+                disableEnable();
+            });
+        }
+
+        function disableEnable() {
+            if ($("#returnData").html() == "" && $('#Message').val() != "" && $('#Subject').val() != "" && $('#Name').val() != "") {
+                $("input[type=submit]").removeAttr("disabled");
+            } else {
+                $("input[type=submit]").attr("disabled", "disabled");
+            }
+        }
+
+        $('#Email').keyup(function () {
+            checkMail();
+        });
+
+        $('#Email').change(function () {
+            checkMail();
+        });
+
+        $('input').keyup(function () {
+            disableEnable();
+        });
+
+        $('input').change(function () {
+            disableEnable();
+        });
+
+        $('textarea').keyup(function () {
+            disableEnable();
+        });
+
+        $('textarea').change(function () {
+            disableEnable();
+        });
+    </script>
+}

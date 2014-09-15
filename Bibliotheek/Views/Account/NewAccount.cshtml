@@ -51,7 +51,7 @@
 
         <div class="span6 offset2 bm30">
             <input type="submit" name="submit" value="Voeg toe" class="btn btn-inverse" disabled>
-            <img src="../../Images/loading.gif" id="contact-loader" alt="Laden...">
+            <img src="../../../Images/loading.gif" id="contact-loader" alt="Laden...">
         </div>
 
         <div class="span6 offset2 error-container"></div>
@@ -65,19 +65,37 @@
 
 @section scripts {
     <script type="text/javascript">
-        $('#Mail').keyup(function () {
+        function checkMail() {
             var url = "/Account/MailCheck";
             var mail = $('#Mail').val();
-            if (mail.length > 5) {
-                $.get(url, { input: mail }, function (data) {
-                    $("#returnData").html(data);
-                    if (data == "Deze email is nog niet bezet") {
-                        $("input[type=submit]").removeAttr("disabled");
-                    } else {
-                        $("input[type=submit]").attr("disabled", "disabled");
-                    }
-                });
+            $.get(url, { input: mail }, function (data) {
+                $("#returnData").html(data);
+                disableEnable();
+            });
+        }
+
+        function disableEnable() {
+            if ($("#returnData").html() == "Deze email is nog niet bezet" && $('#Lastname').val() != "" && $('#Firstname').val() != "") {
+                $("input[type=submit]").removeAttr("disabled");
+            } else {
+                $("input[type=submit]").attr("disabled", "disabled");
             }
+        }
+
+        $('#Mail').keyup(function () {
+            checkMail();
+        });
+
+        $('#Mail').change(function () {
+            checkMail();
+        });
+
+        $('input').keyup(function () {
+            disableEnable();
+        });
+
+        $('input').change(function () {
+            disableEnable();
         });
     </script>
 }

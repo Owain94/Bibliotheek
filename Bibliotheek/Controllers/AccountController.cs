@@ -29,9 +29,9 @@ namespace Bibliotheek.Controllers
             {
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-                // ReSharper disable EmptyGeneralCatchClause 
+            // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-                // ReSharper restore EmptyGeneralCatchClause 
+            // ReSharper restore EmptyGeneralCatchClause 
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }
@@ -63,6 +63,7 @@ namespace Bibliotheek.Controllers
 
         //
         // GET: /Account/
+        [EnableCompression]
         public ActionResult NewAccount()
         {
             // Get view

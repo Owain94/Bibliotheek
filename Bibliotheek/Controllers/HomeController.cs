@@ -55,6 +55,15 @@ namespace Bibliotheek.Controllers
             return View();
         }
 
+        //
+        // AJAX:
+        // GET: /Home/UsernameCheck
+        [EnableCompression]
+        public string MailCheck(string input)
+        {
+            return ValidateEmail.IsValidEmail(input) ? "true" : "false";
+        }
+
         #endregion Public Methods
     }
 }
