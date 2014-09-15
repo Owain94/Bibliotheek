@@ -41,7 +41,7 @@ namespace Bibliotheek.Models
         public string HouseNumber { get; set; }
 
         [Display(Name = "Geslacht:")]
-        public bool Gender { get; set; }
+        public int Gender { get; set; }
 
         [Required(ErrorMessage = "Geboortedatum is verplicht")]
         [Display(Name = "Geboortedatum:")]

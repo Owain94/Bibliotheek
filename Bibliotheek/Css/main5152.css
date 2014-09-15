@@ -1551,3 +1551,7 @@ a#scroll-top {
         display: inline-block;
     }
 }
+
+.margin15 {
+    margin-bottom: 15px;
+}

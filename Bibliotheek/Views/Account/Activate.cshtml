@@ -65,9 +65,9 @@
         <div class="span2">
             @Html.LabelFor(model => model.Gender)
         </div>
-        <div class="span6">
-            @Html.RadioButtonFor(model => model.Gender, true, new { id = "Gender_true" })<label for="Gender_true">Man</label>
-            @Html.RadioButtonFor(model => model.Gender, false, new { id = "Gender_false" })<label for="Gender_false">Vrouw</label>
+        <div class="span6 margin15">
+            @Html.RadioButtonFor(model => model.Gender, 0, new {id = "Gender0"}) @Html.LabelFor(model => model.Gender, " Man", new {@for = "Gender0"}) <br />
+            @Html.RadioButtonFor(model => model.Gender, 1, new {id = "Gender1"}) @Html.LabelFor(model => model.Gender, " Vrouw", new {@for = "Gender1"})
         </div>
 
         <div class="span2">

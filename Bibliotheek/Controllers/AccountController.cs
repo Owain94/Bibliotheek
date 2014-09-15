@@ -21,7 +21,7 @@ namespace Bibliotheek.Controllers
         {
             var model = new ActivateModel
             {
-                Gender = true
+                Gender = 0
             };
 
             var token = string.Empty;
