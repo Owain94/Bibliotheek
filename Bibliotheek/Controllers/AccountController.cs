@@ -1,10 +1,13 @@
 ﻿#region
 
+using System.Drawing.Imaging;
+using System.Web.Security;
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
 using System;
 using System.Web.Mvc;
+using MySql.Data.MySqlClient;
 
 #endregion
 
@@ -57,9 +60,9 @@ namespace Bibliotheek.Controllers
             {
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-            // ReSharper disable EmptyGeneralCatchClause 
+                // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause 
+                // ReSharper restore EmptyGeneralCatchClause 
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }
@@ -70,20 +73,18 @@ namespace Bibliotheek.Controllers
             }
 
             model.GetValues(token);
+            model.PostalCode =
+                Crypt.StringEncrypt(
+                    SqlInjection.SafeSqlLiteral(StringManipulation.ToUpperFast(model.PostalCode))
+                        .Replace(" ", string.Empty), model.Pepper);
+            model.HouseNumber = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.HouseNumber), model.Pepper);
+            model.Password = Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.Password), model.Pepper);
 
-            Response.Write("ID: " + model.Id + "<br />");
-            Response.Write("Voornaam: " + model.Firstname + "<br />");
-            Response.Write("Tussenvoegsel: " + model.Inclusion + "<br />");
-            Response.Write("Achternaam: " + model.Lastname + "<br />");
-            Response.Write("Email: " + model.Mail + "<br />");
-            Response.Write("Postcode: " + Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(StringManipulation.ToUpperFast(model.PostalCode)).Replace(" ", string.Empty), model.Pepper) + "<br />");
-            Response.Write("Huisnummer: " + Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.HouseNumber), model.Pepper) + "<br />");
-            Response.Write("Geslacht: " + model.Gender + "<br />");
-            Response.Write("Geboortedatum: " + StringManipulation.DateTimeToMySql(model.DOB) + "<br />");
-            Response.Write("Wachtwoord: " + Crypt.StringEncrypt(SqlInjection.SafeSqlLiteral(model.Password), model.Pepper) + "<br />");
-            Response.Write("Pepper: " + model.Pepper + "<br />");
-
-            return View(model);
+            if (model.UpdateAccount())
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View("Error");
         }
 
         //

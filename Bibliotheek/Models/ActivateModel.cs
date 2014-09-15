@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System;
@@ -46,7 +47,7 @@ namespace Bibliotheek.Models
         [Required(ErrorMessage = "Geboortedatum is verplicht")]
         [Display(Name = "Geboortedatum:")]
         [DataType(DataType.Date)]
-        public DateTime DOB { get; set; }
+        public DateTime Dob { get; set; }
 
         [Required(ErrorMessage = "Wachtwoord is verplicht")]
         [Display(Name = "Wachtwoord:")]
@@ -110,6 +111,49 @@ namespace Bibliotheek.Models
                     }
                 }
             }
+        }
+
+        public bool UpdateAccount()
+        {
+            const string result = "UPDATE meok2_bibliotheek_gebruikers " +
+                                  "SET postcode = ?, " +
+                                  "huisnummer = ?, " +
+                                  "geslacht = ?, " +
+                                  "dob = ?, " +
+                                  "password = ?, " +
+                                  "salt = ? " +
+                                  "WHERE id = ?";
+
+            var salt = Crypt.GetRandomSalt();
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var showresult = new MySqlCommand(result, empConnection))
+                {
+                    showresult.Parameters.Add("postcode", MySqlDbType.VarChar).Value = PostalCode;
+                    showresult.Parameters.Add("huisnummer", MySqlDbType.VarChar).Value = HouseNumber;
+                    showresult.Parameters.Add("geslacht", MySqlDbType.VarChar).Value = Gender;
+                    showresult.Parameters.Add("dob", MySqlDbType.Date).Value = StringManipulation.DateTimeToMySql(Dob);
+                    showresult.Parameters.Add("password", MySqlDbType.VarChar).Value = Crypt.HashPassword(Password, salt);
+                    showresult.Parameters.Add("salt", MySqlDbType.VarChar).Value = salt;
+                    showresult.Parameters.Add("id", MySqlDbType.Int16).Value = Id;
+
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        showresult.ExecuteNonQuery();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        return false;
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return true;
         }
 
         #endregion Public Methods
