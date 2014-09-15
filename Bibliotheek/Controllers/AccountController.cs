@@ -38,9 +38,9 @@ namespace Bibliotheek.Controllers
                 // Get the token from the RouteData 
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-                // ReSharper disable EmptyGeneralCatchClause 
+            // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-                // ReSharper restore EmptyGeneralCatchClause 
+            // ReSharper restore EmptyGeneralCatchClause 
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -70,9 +70,9 @@ namespace Bibliotheek.Controllers
                 // Get the token from the RouteData 
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-                // ReSharper disable EmptyGeneralCatchClause 
+            // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-                // ReSharper restore EmptyGeneralCatchClause 
+            // ReSharper restore EmptyGeneralCatchClause 
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }
