@@ -19,16 +19,19 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Activate()
         {
-            var model = new ActivateModel();
+            var model = new ActivateModel
+            {
+                Gender = true
+            };
 
             var token = string.Empty;
             try
             {
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-            // ReSharper disable EmptyGeneralCatchClause 
+                // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause 
+                // ReSharper restore EmptyGeneralCatchClause 
             {
                 Response.Redirect("http://66164.ict-lab.nl/", true);
             }

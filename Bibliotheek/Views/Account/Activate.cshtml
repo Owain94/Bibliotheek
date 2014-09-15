@@ -13,40 +13,88 @@
         <hr>
     </article>
     @using (Html.BeginForm("Activate", "Account",
-        new { ViewBag.ReturnUrl },
-        FormMethod.Post, new { @id = "contact-form", @class = "row" }))
+        new {ViewBag.ReturnUrl},
+        FormMethod.Post, new {@id = "contact-form", @class = "row"}))
     {
         <div class="span2">
             @Html.LabelFor(model => model.Firstname)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Firstname, new { @class = "input-xlarge", disabled = "disabled" })
+            @Html.TextBoxFor(model => model.Firstname, new {@class = "input-xlarge", disabled = "disabled"})
         </div>
 
         <div class="span2">
             @Html.LabelFor(model => model.Inclusion)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Inclusion, new { @class = "input-xlarge", disabled = "disabled" })
+            @Html.TextBoxFor(model => model.Inclusion, new {@class = "input-xlarge", disabled = "disabled"})
         </div>
 
         <div class="span2">
             @Html.LabelFor(model => model.Lastname)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Lastname, new { @class = "input-xlarge", disabled = "disabled" })
+            @Html.TextBoxFor(model => model.Lastname, new {@class = "input-xlarge", disabled = "disabled"})
         </div>
 
         <div class="span2">
             @Html.LabelFor(model => model.Mail)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Mail, new { @class = "input-xlarge", type = "email", disabled = "disabled" })
+            @Html.TextBoxFor(model => model.Mail, new {@class = "input-xlarge", type = "email", disabled = "disabled"})
             <span id="returnData"></span>
         </div>
 
+        <div class="span2">
+            @Html.LabelFor(model => model.PostalCode)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.PostalCode, new {@class = "input-xlarge"})
+            @Html.ValidationMessageFor(model => model.PostalCode)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.HouseNumber)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.HouseNumber, new {@class = "input-xlarge"})
+            @Html.ValidationMessageFor(model => model.HouseNumber)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Gender)
+        </div>
+        <div class="span6">
+            @Html.RadioButtonFor(model => model.Gender, true, new {id = "Gender_true"})<label for="Gender_true">Man</label>
+            @Html.RadioButtonFor(model => model.Gender, false, new {id = "Gender_false"})<label for="Gender_false">Vrouw</label>
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.DOB)
+        </div>
+        <div class="span6">
+            @Html.EditorFor(model => model.DOB, new {@class = "input-xlarge"})
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="span6">
+            @Html.PasswordFor(model => model.Password, new {@class = "input-xlarge"})
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Password)
+        </div>
+        <div class="span6">
+            @Html.PasswordFor(model => model.Password, new {id = "Password2", @class = "input-xlarge"})
+            @Html.ValidationMessageFor(model => model.Password)
+        </div>
+
         <div class="span6 offset2 bm30">
-            <input type="submit" name="submit" value="Voeg toe" class="btn btn-inverse" disabled>
+            <input type="submit" name="submit" value="Update" class="btn btn-inverse">
             <img src="../../Images/loading.gif" id="contact-loader" alt="Laden...">
         </div>
 
