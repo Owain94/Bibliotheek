@@ -43,7 +43,7 @@
             @Html.LabelFor(model => model.Genre)
         </div>
         <div class="span6">
-            @Html.DropDownListFor(model => model.Genre, Model.Genres, new { @class = "input-285" })
+            @Html.DropDownListFor(model => model.Genre, Model.Genres, "Kies... ", new { @class = "input-285" })
         </div>
 
         <div class="span2">
@@ -58,7 +58,7 @@
         @Html.LabelFor(model => model.Floor)
     </div>
     <div class="span6">
-        @Html.DropDownListFor(model => model.Floor, Model.Floors, new { @class = "input-143" }) @Html.DropDownListFor(model => model.Rack, Model.Racks, new { @class = "input-142" })
+        @Html.DropDownListFor(model => model.Floor, Model.Floors, "Kies... ", new { @class = "input-143" }) @Html.DropDownListFor(model => model.Rack, Model.Racks, "Kies... ", new { @class = "input-142" })
     </div>
 
         <div class="span6 offset2 bm30">
