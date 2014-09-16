@@ -22,7 +22,6 @@ namespace Bibliotheek.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            VerifyAdminRights();
             return View();
         }
 
@@ -36,7 +35,6 @@ namespace Bibliotheek.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            VerifyAdminRights();
             return View();
         }
 
@@ -45,32 +43,11 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult SignOut()
         {
-            Session["Admin"] = "false";
             FormsAuthentication.SignOut();
 
             return View();
         }
 
         #endregion Public Methods
-
-        #region Private Methods
-
-        private void VerifyAdminRights()
-        {
-            var user = User.Identity as FormsIdentity;
-            // ReSharper disable PossibleNullReferenceException 
-            var ticket = user.Ticket;
-            // ReSharper restore PossibleNullReferenceException 
-            if (CheckAdminRights.AdminRights(ticket.UserData))
-            {
-                Session["Admin"] = "true";
-            }
-            else
-            {
-                Session["Admin"] = "false";
-            }
-        }
-
-        #endregion Private Methods
     }
 }

@@ -128,7 +128,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="Attributes\EnableCompressionAttribute.cs" />
-    <Compile Include="Classes\CheckAdminRights.cs" />
     <Compile Include="Classes\Cookies.cs" />
     <Compile Include="Classes\Crypt.cs" />
     <Compile Include="Classes\DatabaseConnection.cs" />
@@ -148,6 +147,7 @@
     <Compile Include="Models\ActivateModel.cs" />
     <Compile Include="Models\BookModel.cs" />
     <Compile Include="Models\ContactModel.cs" />
+    <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

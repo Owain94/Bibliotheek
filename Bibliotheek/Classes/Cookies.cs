@@ -15,10 +15,10 @@ namespace Bibliotheek.Classes
         // <summary>
         // Create a HttpOnly cookie 
         // </summary>
-        public static void MakeCookie(string email, string savedId)
+        public static void MakeCookie(string email, string savedId, string admin)
         {
             var tkt = new FormsAuthenticationTicket(1, email, DateTime.Now,
-                DateTime.Now.AddMinutes((44640)), false, savedId);
+                DateTime.Now.AddMinutes((44640)), false, savedId + "|" + admin);
             var cookiestr = FormsAuthentication.Encrypt(tkt);
             var ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr)
             {

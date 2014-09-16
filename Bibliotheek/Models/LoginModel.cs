@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System.ComponentModel.DataAnnotations;
@@ -66,7 +67,7 @@ namespace Bibliotheek.Models
                         // Hash the password and check if the hash is the same as the saved password 
                         if (Crypt.ValidatePassword(password, savedPassword, savedSalt))
                         {
-                            Cookies.MakeCookie(email, savedId);
+                            Cookies.MakeCookie(email, savedId, Admin.ToString(CultureInfo.InvariantCulture));
                             return true;
                         }
                     }

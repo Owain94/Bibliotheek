@@ -95,7 +95,7 @@ namespace Bibliotheek.Controllers
             // If UpdateAccount fails show error page 
             if (!model.UpdateAccount()) return View("Error");
             // Make cookie for user 
-            Cookies.MakeCookie(model.Mail, model.Id.ToString(CultureInfo.InvariantCulture));
+            Cookies.MakeCookie(model.Mail, model.Id.ToString(CultureInfo.InvariantCulture), "0");
             return RedirectToAction("Account", "Logged");
         }
 
@@ -123,10 +123,6 @@ namespace Bibliotheek.Controllers
             if (!ModelState.IsValid) return View(model);
             if (model.Login())
             {
-                if (model.Admin == 1)
-                {
-                    Session["Admin"] = "true";
-                }
                 // If email and password are correct redirect user 
                 return RedirectToAction("LoggedIn", "Logged");
             }
