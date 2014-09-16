@@ -35,6 +35,8 @@ namespace Bibliotheek
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
+            ModelMetadataProviders.Current = new CachedDataAnnotationsModelMetadataProvider();
+
             MvcHandler.DisableMvcResponseHeader = true;
 
             ScriptManager.ScriptResourceMapping.AddDefinition("jQuery", new ScriptResourceDefinition
