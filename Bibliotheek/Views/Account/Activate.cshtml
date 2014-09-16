@@ -74,9 +74,10 @@
             @Html.LabelFor(model => model.Dob)
         </div>
         <div class="span6">
-            @Html.EditorFor(model => model.Dob, new { @class = "input-xlarge" })
+            @Html.EditorFor(model => model.Dob)
             @Html.ValidationMessageFor(model => model.Dob)
         </div>
+
 
         <div class="span2">
             @Html.LabelFor(model => model.Password)
@@ -111,6 +112,7 @@
 
 @section scripts {
     <script type="text/javascript">
+        $("#Dob").addClass("input-xlarge");
         var postalCodeCheck = false;
         var passwordCheck = false;
 

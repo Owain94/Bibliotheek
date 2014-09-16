@@ -1,6 +1,6 @@
-﻿@model Bibliotheek.Models.LoginModel
+﻿@model Bibliotheek.Models.BookModel
 @{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Boek toevoegen";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -8,37 +8,58 @@
 
     <article class="type-page hentry clearfix">
         <h1 class="post-title">
-            <a href="#">Inloggen</a>
+            <a href="#">Nieuw boek toevoegen</a>
         </h1>
         <hr>
     </article>
-    @using (Html.BeginForm("Login", "Account",
+    @using (Html.BeginForm("AddBook", "Book",
         new { ViewBag.ReturnUrl },
         FormMethod.Post, new { @id = "contact-form", @class = "row" }))
     {
-
         <div class="span2">
         </div>
         <div class="span6">
             @ViewBag.Error
         </div>
-        
+
         <div class="span2">
-            @Html.LabelFor(model => model.Email)
+            @Html.LabelFor(model => model.Title)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Email, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Title, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Title)
             <span id="returnData"></span>
         </div>
 
         <div class="span2">
-            @Html.LabelFor(model => model.Password)
+            @Html.LabelFor(model => model.Author)
         </div>
         <div class="span6">
-            @Html.PasswordFor(model => model.Password, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => model.Password)
+            @Html.TextBoxFor(model => model.Author, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Author)
         </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Genre)
+        </div>
+        <div class="span6">
+            @Html.DropDownListFor(model => model.Genre, Model.Genres, new { @class = "input-285" })
+        </div>
+
+        <div class="span2">
+            @Html.LabelFor(model => model.Isbn)
+        </div>
+        <div class="span6">
+            @Html.TextBoxFor(model => model.Isbn, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Isbn)
+        </div>
+
+    <div class="span2">
+        @Html.LabelFor(model => model.Floor)
+    </div>
+    <div class="span6">
+        @Html.DropDownListFor(model => model.Floor, Model.Floors, new { @class = "input-143" }) @Html.DropDownListFor(model => model.Rack, Model.Racks, new { @class = "input-142" })
+    </div>
 
         <div class="span6 offset2 bm30">
             <input type="submit" name="submit" value="Voeg toe" class="btn btn-inverse" disabled>
@@ -56,34 +77,13 @@
 
 @section scripts {
     <script type="text/javascript">
-        function checkMail() {
-            var url = "/Home/MailCheck";
-            var mail = $('#Email').val();
-            $.get(url, { input: mail }, function (data) {
-                if (data == "true") {
-                    $("#returnData").html("");
-                } else {
-                    $("#returnData").html("Dit is geen geldig email adres");
-                }
-                disableEnable();
-            });
-        }
-
         function disableEnable() {
-            if ($("#returnData").html() == "" && $('#Password').val() != "" && $('#Email').val() != "") {
+            if ($('#Title').val() != "" && $('#Author').val() != "" && $('#Isbn').val() != "") {
                 $("input[type=submit]").removeAttr("disabled");
             } else {
                 $("input[type=submit]").attr("disabled", "disabled");
             }
         }
-
-        $('#Email').keyup(function () {
-            checkMail();
-        });
-
-        $('#Email').change(function () {
-            checkMail();
-        });
 
         $('input').keyup(function () {
             disableEnable();
