@@ -2,11 +2,11 @@
 
 using System;
 using System.Web;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.UI;
+using Bibliotheek.Classes;
 
 #endregion
 
@@ -25,7 +25,9 @@ namespace Bibliotheek
         protected void Application_Start()
         {
             ViewEngines.Engines.Clear();
-            ViewEngines.Engines.Add(new RazorViewEngine());
+            var viewEngine = new RazorViewEngine();
+            viewEngine.ViewLocationCache = new TwoLevelViewCache(viewEngine.ViewLocationCache);
+            ViewEngines.Engines.Add(viewEngine);
 
             AreaRegistration.RegisterAllAreas();
 

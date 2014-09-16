@@ -136,6 +136,7 @@
     <Compile Include="Classes\SqlInjection.cs" />
     <Compile Include="Classes\StringManipulation.cs" />
     <Compile Include="Classes\TimeConvert.cs" />
+    <Compile Include="Classes\TwoLevelViewCache.cs" />
     <Compile Include="Classes\ValidateEmail.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BookController.cs" />
