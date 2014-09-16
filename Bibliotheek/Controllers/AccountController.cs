@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Web.UI.WebControls;
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
@@ -109,7 +110,7 @@ namespace Bibliotheek.Controllers
                 return RedirectToAction("Account", "Logged");
             }
             // Get view 
-            return View();
+            return View(new LoginModel());
         }
 
         //
@@ -119,7 +120,7 @@ namespace Bibliotheek.Controllers
         public ActionResult Login(LoginModel model)
         {
             // If modelState is invalid return the View 
-            if (!ModelState.IsValid) return View();
+            if (!ModelState.IsValid) return View(model);
             if (model.Login())
             {
                 if (model.Admin == 1)
@@ -131,7 +132,7 @@ namespace Bibliotheek.Controllers
             }
             // Show error if the username and password are wrong 
             ViewBag.Error = "Deze inlog gegevens zijn niet bij ons bekend";
-            return View();
+            return View(model);
         }
 
         //
@@ -156,7 +157,7 @@ namespace Bibliotheek.Controllers
         public ActionResult NewAccount()
         {
             // Get view
-            return View();
+            return View(new RegisterModel());
         }
 
         //

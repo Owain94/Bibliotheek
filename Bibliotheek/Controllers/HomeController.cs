@@ -28,7 +28,7 @@ namespace Bibliotheek.Controllers
         public ActionResult Contact()
         {
             // Get view 
-            return View();
+            return View(new ContactModel());
         }
 
         //
