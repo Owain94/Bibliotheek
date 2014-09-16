@@ -154,7 +154,6 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Css\blue-skin5152.css" />
     <Content Include="Css\blue-skin\blue-bg.jpg" />
     <Content Include="Css\blue-skin\devine-art.png" />
