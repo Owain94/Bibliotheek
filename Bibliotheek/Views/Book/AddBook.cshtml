@@ -78,7 +78,7 @@
 @section scripts {
     <script type="text/javascript">
         function disableEnable() {
-            if ($('#Title').val() != "" && $('#Author').val() != "" && $('#Isbn').val() != "") {
+            if ($('#Title').val() != "" && $('#Author').val() != "" && $('#Isbn').val() != "" && $('#Genre').val() != "" && $('#Floor').val() != "" && $('#Rack').val() != "") {
                 $("input[type=submit]").removeAttr("disabled");
             } else {
                 $("input[type=submit]").attr("disabled", "disabled");
@@ -90,6 +90,10 @@
         });
 
         $('input').change(function () {
+            disableEnable();
+        });
+
+        $('select').change(function () {
             disableEnable();
         });
     </script>
