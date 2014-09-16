@@ -36,7 +36,7 @@
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 <li>@Html.ActionLink("Over ons", "About", "Home")</li>
                                 @{
-                                    if (!HttpContext.Current.Request.IsAuthenticated)
+                                    if (!IdentityModel.CurrentUserLoggedIn)
                                     {
                                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                                     }
@@ -57,7 +57,7 @@
                                 }
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 @{
-                                    if (HttpContext.Current.Request.IsAuthenticated)
+                                    if (IdentityModel.CurrentUserLoggedIn)
                                     {
                                         <li>@Html.ActionLink("Uitloggen", "SignOut", "Logged")</li>
                                     }

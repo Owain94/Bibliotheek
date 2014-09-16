@@ -40,6 +40,13 @@ namespace Bibliotheek.Models
             }
         }
 
+        public static bool CurrentUserLoggedIn
+        {
+            get {
+                return HttpContext.Current.Request.IsAuthenticated;
+            }
+        }
+
         #endregion Public Properties
     }
 }
