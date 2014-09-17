@@ -178,7 +178,7 @@ namespace Bibliotheek.Models
 
         #region Public Methods
 
-        public static string GetBook()
+        public static string GetNewBooks()
         {
             var id = String.Empty;
             var title = String.Empty;

@@ -3,7 +3,7 @@
     <h3 class="title">Laatste boeken</h3>
     <ul class="articles">
         @{
-            var book = BookModel.GetBook().Split('|');
+            var book = BookModel.GetNewBooks().Split('|');
             var random = new Random();
 
             <li class="article-entry standard">
