@@ -47,6 +47,30 @@ namespace Bibliotheek.Models
             {BookGenres.Wonen, "Wonen & Tuinieren"}
         };
 
+        public static readonly Dictionary<int, string> DictGenreFromInt = new Dictionary<int, string>
+        {
+            {1, "Literatuur & Romans"},
+            {2, "Thrillers"},
+            {3, "Kind & Jeugd"},
+            {4, "Eten & Koken"},
+            {5, "Gezondheid"},
+            {6, "Psychologie"},
+            {7, "Fantasy"},
+            {8, "Young Adults"},
+            {9, "Reizen & Talen"},
+            {10, "Sport & Hobby"},
+            {11, "Kunst & Cultuur"},
+            {12, "Geschiedenis & Politiek"},
+            {13, "Studieboeken"},
+            {14, "Managementboeken"},
+            {15, "Computer"},
+            {16, "Religie"},
+            {17, "Spiritualiteit"},
+            {18, "School & Examen"},
+            {19, "Stripboeken"},
+            {20, "Wonen & Tuinieren"}
+        };
+
         public static readonly Dictionary<BookRacks, string> DictRacks = new Dictionary<BookRacks, string>
         {
             {BookRacks.First, "1ste"},
@@ -159,9 +183,10 @@ namespace Bibliotheek.Models
             var id = String.Empty;
             var title = String.Empty;
             var author = String.Empty;
+            var genre = String.Empty;
             var date = String.Empty;
             // MySQL query Select book in the database 
-            const string result = "SELECT id, titel, auteur, dateadded " +
+            const string result = "SELECT id, titel, auteur, genre, dateadded " +
                                   "FROM meok2_bibliotheek_boeken " +
                                   "ORDER BY id DESC " +
                                   "LIMIT 5";
@@ -182,7 +207,8 @@ namespace Bibliotheek.Models
                                 id = id + myDataReader.GetString(0) + "|";
                                 title = title + myDataReader.GetString(1) + "|";
                                 author = author + myDataReader.GetString(2) + "|";
-                                date = date + myDataReader.GetDateTime(3).ToString("d MMM yyyy") + "|";
+                                genre = genre + myDataReader.GetInt16(3) + "|";
+                                date = date + myDataReader.GetDateTime(4).ToString("d MMM yyyy") + "|";
                             }
                         }
                     }
@@ -196,7 +222,7 @@ namespace Bibliotheek.Models
                     }
                 }
             }
-            return id + title + author + date;
+            return id + title + author + genre + date;
         }
 
         // <summary>

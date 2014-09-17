@@ -39,13 +39,19 @@ namespace Bibliotheek.Controllers
             return View(model);
         }
 
+        // GET: Genre 
+        public ActionResult Genre(string genre)
+        {
+            return Content(genre);
+        }
+
         // GET: SingleAuthor 
         public ActionResult SingleAuthor(string name)
         {
             return Content(name);
         }
 
-        // GET: SingleAuthor 
+        // GET: SingleBook 
         public ActionResult SingleBook(string id)
         {
             return Content(id);
