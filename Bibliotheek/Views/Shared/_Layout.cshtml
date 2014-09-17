@@ -49,12 +49,17 @@
                                                 <a href="#">Gebruikers</a>
                                                 <ul class="sub-menu">
                                                     <li>@Html.ActionLink("Gebruiker toevoegen", "NewAccount", "Account")</li>
-                                                    <li><a href="#">Test</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Boeken</a>
+                                                <ul class="sub-menu">
+                                                    <li>@Html.ActionLink("Boek toevoegen", "AddBook", "Book")</li>
                                                 </ul>
                                             </li>
                                         }
                                     }
-                                }
+}
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 @{
                                     if (IdentityModel.CurrentUserLoggedIn)

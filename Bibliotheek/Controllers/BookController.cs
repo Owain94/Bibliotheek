@@ -65,31 +65,7 @@ namespace Bibliotheek.Controllers
         // GET: Book 
         public ActionResult AddBook()
         {
-            var model = new BookModel();
-
-            var genreTypes = Enum.GetValues(typeof(BookModel.BookGenres)).Cast<BookModel.BookGenres>();
-            model.Genres = from genre in genreTypes
-                           select new SelectListItem
-                           {
-                               Text = _dictGenre[genre],
-                               Value = ((int)genre).ToString(CultureInfo.InvariantCulture)
-                           };
-
-            var floorTypes = Enum.GetValues(typeof(BookModel.BookFloors)).Cast<BookModel.BookFloors>();
-            model.Floors = from floor in floorTypes
-                           select new SelectListItem
-                           {
-                               Text = _dictFloors[floor] + " verdieping",
-                               Value = ((int)floor).ToString(CultureInfo.InvariantCulture)
-                           };
-
-            var rackTypes = Enum.GetValues(typeof(BookModel.BookRacks)).Cast<BookModel.BookRacks>();
-            model.Racks = from rack in rackTypes
-                           select new SelectListItem
-                           {
-                               Text = _dictRacks[rack] + " rek",
-                               Value = ((int)rack).ToString(CultureInfo.InvariantCulture)
-                           };
+            var model = BindModel(new BookModel());
 
             return View(model);
         }
@@ -97,6 +73,23 @@ namespace Bibliotheek.Controllers
         // POST: Book 
         [HttpPost]
         public ActionResult AddBook(BookModel model)
+        {
+            ViewBag.Error = String.Empty;
+            model = BindModel(model);
+
+            if (!ModelState.IsValid) return View(model);
+            if (model.AddBook())
+            {
+                ViewBag.Error = "Het boek is toegevoegd!";
+                return View(model);
+            }
+            ViewBag.Error = "Het boek is niet toegevoegd, probeer het later nog eens!";
+            return View(model);
+        }
+
+        #endregion Public Methods
+
+        private BookModel BindModel(BookModel model)
         {
             var genreTypes = Enum.GetValues(typeof(BookModel.BookGenres)).Cast<BookModel.BookGenres>();
             model.Genres = from genre in genreTypes
@@ -122,16 +115,7 @@ namespace Bibliotheek.Controllers
                               Value = ((int)rack).ToString(CultureInfo.InvariantCulture)
                           };
 
-            Response.Write("Titel: " + model.Title + "<br />");
-            Response.Write("Schrijver: " + model.Author + "<br />");
-            Response.Write("Genre: " + model.Genre + "<br />");
-            Response.Write("ISBN: " + model.Isbn + "<br />");
-            Response.Write("Verdieping: " + model.Floor + "<br />");
-            Response.Write("Rek: " + model.Rack);
-
-            return View(model);
+            return model;
         }
-
-        #endregion Public Methods
     }
 }
