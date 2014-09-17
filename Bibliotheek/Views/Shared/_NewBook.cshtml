@@ -1,30 +1,39 @@
-﻿<section class="widget">
+﻿@using Bibliotheek.Models
+<section class="widget">
     <h3 class="title">Laatste boeken</h3>
     <ul class="articles">
-        <li class="article-entry standard">
-            <h4><a href="single.html">Placeholder</a></h4>
-            <span class="article-meta">12 Sep, 2014 in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
-            <span class="like-count">69</span>
-        </li>
-        <li class="article-entry standard">
-            <h4><a href="single.html">Placeholder</a></h4>
-            <span class="article-meta">12 Sep, 2014 in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
-            <span class="like-count">69</span>
-        </li>
-        <li class="article-entry standard">
-            <h4><a href="single.html">Placeholder</a></h4>
-            <span class="article-meta">12 Sep, 2014 in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
-            <span class="like-count">69</span>
-        </li>
-        <li class="article-entry standard">
-            <h4><a href="single.html">Placeholder</a></h4>
-            <span class="article-meta">12 Sep, 2014 in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
-            <span class="like-count">69</span>
-        </li>
-        <li class="article-entry standard">
-            <h4><a href="single.html">Placeholder</a></h4>
-            <span class="article-meta">12 Sep, 2014 in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
-            <span class="like-count">69</span>
-        </li>
+        @{
+            var book = BookModel.GetBook().Split('|');
+
+            <li class="article-entry standard">
+                <h4>@Html.ActionLink(book[5], "SingleBook", "Book", new { id = book[0] }, null) - @Html.ActionLink(book[10], "SingleAuthor", "Book", new { name = book[10] }, null) </h4>
+                <span class="article-meta"> @book[15] in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
+                <span class="like-count">69</span>
+            </li>
+
+            <li class="article-entry standard">
+                <h4><a href="single.html"> @book[6] - @book[11] </a></h4>
+                <span class="article-meta"> @book[16] in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
+                <span class="like-count">69</span>
+            </li>
+
+            <li class="article-entry standard">
+                <h4><a href="single.html"> @book[7] - @book[12] </a></h4>
+                <span class="article-meta"> @book[17] in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
+                <span class="like-count">69</span>
+            </li>
+
+            <li class="article-entry standard">
+                <h4><a href="single.html"> @book[8] - @book[13] </a></h4>
+                <span class="article-meta"> @book[18] in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
+                <span class="like-count">69</span>
+            </li>
+
+            <li class="article-entry standard">
+                <h4><a href="single.html"> @book[9] - @book[14] </a></h4>
+                <span class="article-meta"> @book[19] in <a href="#" title="Bekijk alle nieuwe boeken">Nieuwe boeken</a></span>
+                <span class="like-count">69</span>
+            </li>
+        }
     </ul>
 </section>

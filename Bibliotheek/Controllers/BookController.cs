@@ -1,8 +1,6 @@
 ﻿#region
 
-using System.Collections.Generic;
 using System.Globalization;
-using Bibliotheek.Attributes;
 using Bibliotheek.Models;
 using System;
 using System.Linq;
@@ -14,52 +12,6 @@ namespace Bibliotheek.Controllers
 {
     public class BookController : Controller
     {
-        private readonly Dictionary<BookModel.BookGenres, string> _dictGenre = new Dictionary<BookModel.BookGenres, string> {
-            { BookModel.BookGenres.Literatuur, "Literatuur & Romans" },
-            { BookModel.BookGenres.Thrillers, "Thrillers" },
-            { BookModel.BookGenres.Kind, "Kind & Jeugd" },
-            { BookModel.BookGenres.Eten, "Eten & Koken" },
-            { BookModel.BookGenres.Gezondheid, "Gezondheid" },
-            { BookModel.BookGenres.Psychologie, "Psychologie" },
-            { BookModel.BookGenres.Fantasy, "Fantasy" },
-            { BookModel.BookGenres.Young, "Young Adults" },
-            { BookModel.BookGenres.Reizen, "Reizen & Talen" },
-            { BookModel.BookGenres.Sport, "Sport & Hobby" },
-            { BookModel.BookGenres.Kunst, "Kunst & Cultuur" },
-            { BookModel.BookGenres.Geschiedenis, "Geschiedenis & Politiek" },
-            { BookModel.BookGenres.Studieboeken, "Studieboeken" },
-            { BookModel.BookGenres.Managementboeken, "Managementboeken" },
-            { BookModel.BookGenres.Computer, "Computer" },
-            { BookModel.BookGenres.Religie, "Religie" },
-            { BookModel.BookGenres.Spiritualiteit, "Spiritualiteit" },
-            { BookModel.BookGenres.School, "School & Examen" },
-            { BookModel.BookGenres.Stripboeken, "Stripboeken" },
-            { BookModel.BookGenres.Wonen, "Wonen & Tuinieren" }
-        };
-
-        private readonly Dictionary<BookModel.BookFloors, string> _dictFloors = new Dictionary<BookModel.BookFloors, string> {
-            { BookModel.BookFloors.First, "1ste" },
-            { BookModel.BookFloors.Second, "2de" },
-            { BookModel.BookFloors.Third, "3de" }
-        };
-
-        private readonly Dictionary<BookModel.BookRacks, string> _dictRacks = new Dictionary<BookModel.BookRacks, string> {
-            { BookModel.BookRacks.First, "1ste" },
-            { BookModel.BookRacks.Second, "2de" },
-            { BookModel.BookRacks.Third, "3de" },
-            { BookModel.BookRacks.Fourth, "4de" },
-            { BookModel.BookRacks.Fifth, "5de" },
-            { BookModel.BookRacks.Sixth, "6de" },
-            { BookModel.BookRacks.Seventh, "7de" },
-            { BookModel.BookRacks.Eighth, "8ste" },
-            { BookModel.BookRacks.Ninth, "9de" },
-            { BookModel.BookRacks.Tenth, "10de" },
-            { BookModel.BookRacks.Eleventh, "11de" },
-            { BookModel.BookRacks.Twelfth, "12de" },
-            { BookModel.BookRacks.Thirteenth, "13de" },
-            { BookModel.BookRacks.Fourteenth, "14de" },
-            { BookModel.BookRacks.Fifteenth, "15de" }
-        };
         #region Public Methods
 
         // GET: Book 
@@ -87,15 +39,27 @@ namespace Bibliotheek.Controllers
             return View(model);
         }
 
+        // GET: SingleAuthor 
+        public ActionResult SingleAuthor(string name)
+        {
+            return Content(name);
+        }
+
+        // GET: SingleAuthor 
+        public ActionResult SingleBook(string id)
+        {
+            return Content(id);
+        }
+
         #endregion Public Methods
 
-        private BookModel BindModel(BookModel model)
+        private static BookModel BindModel(BookModel model)
         {
             var genreTypes = Enum.GetValues(typeof(BookModel.BookGenres)).Cast<BookModel.BookGenres>();
             model.Genres = from genre in genreTypes
                            select new SelectListItem
                            {
-                               Text = _dictGenre[genre],
+                               Text = BookModel.DictGenre[genre],
                                Value = ((int)genre).ToString(CultureInfo.InvariantCulture)
                            };
 
@@ -103,7 +67,7 @@ namespace Bibliotheek.Controllers
             model.Floors = from floor in floorTypes
                            select new SelectListItem
                            {
-                               Text = _dictFloors[floor] + " verdieping",
+                               Text = BookModel.DictFloors[floor] + " verdieping",
                                Value = ((int)floor).ToString(CultureInfo.InvariantCulture)
                            };
 
@@ -111,7 +75,7 @@ namespace Bibliotheek.Controllers
             model.Racks = from rack in rackTypes
                           select new SelectListItem
                           {
-                              Text = _dictRacks[rack] + " rek",
+                              Text = BookModel.DictRacks[rack] + " rek",
                               Value = ((int)rack).ToString(CultureInfo.InvariantCulture)
                           };
 

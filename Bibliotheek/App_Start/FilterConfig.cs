@@ -1,13 +1,12 @@
 ﻿#region
 
-using System.Web;
 using System.Web.Mvc;
 
 #endregion
 
 namespace Bibliotheek
 {
-    public class FilterConfig
+    public static class FilterConfig
     {
         #region Public Methods
 

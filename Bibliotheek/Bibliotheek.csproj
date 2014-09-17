@@ -300,6 +300,8 @@
     <Content Include="Views\Logged\LoggedIn.cshtml" />
     <Content Include="Views\Book\AddBook.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Book\SingleAuthor.cshtml" />
+    <Content Include="Views\Book\SingleBook.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
