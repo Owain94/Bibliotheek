@@ -42,7 +42,7 @@ namespace Bibliotheek.Controllers
         // GET: Genre 
         public ActionResult Genre(string genre)
         {
-            return Content(genre);
+            return View();
         }
 
         // GET: SingleAuthor 
