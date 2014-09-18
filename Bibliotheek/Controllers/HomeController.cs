@@ -48,6 +48,7 @@ namespace Bibliotheek.Controllers
 
         //
         // GET: /Home/Index 
+        [EnableCompression]
         public ActionResult Index()
         {
             // Get view 
