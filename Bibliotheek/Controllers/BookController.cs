@@ -1,8 +1,9 @@
 ﻿#region
 
-using System.Globalization;
+using Bibliotheek.Attributes;
 using Bibliotheek.Models;
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -15,6 +16,7 @@ namespace Bibliotheek.Controllers
         #region Public Methods
 
         // GET: Book 
+        [EnableCompression]
         public ActionResult AddBook()
         {
             var model = BindModel(new BookModel());
@@ -24,6 +26,7 @@ namespace Bibliotheek.Controllers
 
         // POST: Book 
         [HttpPost]
+        [EnableCompression]
         public ActionResult AddBook(BookModel model)
         {
             ViewBag.Error = String.Empty;
@@ -40,21 +43,24 @@ namespace Bibliotheek.Controllers
         }
 
         // GET: Genre 
+        [EnableCompression]
         public ActionResult Genre(string genre)
         {
             return View();
         }
 
         // GET: SingleAuthor 
+        [EnableCompression]
         public ActionResult SingleAuthor(string name)
         {
-            return Content(name);
+            return View();
         }
 
         // GET: SingleBook 
+        [EnableCompression]
         public ActionResult SingleBook(string id)
         {
-            return Content(id);
+            return View();
         }
 
         #endregion Public Methods

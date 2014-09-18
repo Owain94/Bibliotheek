@@ -1,7 +1,20 @@
-﻿
-@{
-    ViewBag.Title = "SingleBook";
+﻿@{
+    ViewBag.Title = "Boek";
+    var id = Url.RequestContext.RouteData.Values["id"].ToString();
 }
 
-<h2>SingleBook</h2>
+<div class="span8 page-content">
 
+    <article class="type-page hentry clearfix">
+        <h1 class="post-title">
+            <a href="#"> @id </a>
+        </h1>
+        <hr>
+    </article>
+
+    <p>Placeholder</p>
+</div>
+
+<aside class="span4 page-sidebar">
+    @Html.Partial("_NewBook")
+</aside>

@@ -1,13 +1,13 @@
 ﻿@{
     ViewBag.Title = "Genre";
-    var id = Url.RequestContext.RouteData.Values["genre"].ToString();
+    var genre = Url.RequestContext.RouteData.Values["genre"].ToString();
 }
 
 <div class="span8 page-content">
 
     <article class="type-page hentry clearfix">
         <h1 class="post-title">
-            <a href="#"> @id </a>
+            <a href="#"> @genre </a>
         </h1>
         <hr>
     </article>

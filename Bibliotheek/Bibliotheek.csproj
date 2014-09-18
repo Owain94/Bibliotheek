@@ -251,7 +251,9 @@
     <Content Include="Js\jquery.validate.min.js" />
     <Content Include="Js\prettyphoto\jquery.prettyPhoto.js" />
     <Content Include="Js\prettyphoto\prettyPhotoaeb9.css" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -292,7 +294,9 @@
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\PublishProfiles\School.pubxml" />
+    <None Include="Properties\PublishProfiles\School.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\Thuis.pubxml" />
     <Content Include="Views\Account\Activate.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
