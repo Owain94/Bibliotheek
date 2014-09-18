@@ -292,6 +292,7 @@
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\School.pubxml" />
     <None Include="Properties\PublishProfiles\Thuis.pubxml" />
     <Content Include="Views\Account\Activate.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
