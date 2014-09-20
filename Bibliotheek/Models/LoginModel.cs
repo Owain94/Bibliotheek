@@ -33,9 +33,9 @@ namespace Bibliotheek.Models
         {
             var email = SqlInjection.SafeSqlLiteral(StringManipulation.ToLowerFast(Email));
             var password = Password;
-            var savedPassword = "";
-            var savedSalt = "";
-            var savedId = "";
+            var savedPassword = String.Empty;
+            var savedSalt = String.Empty;
+            var savedId = String.Empty;
 
             // MySQL query 
             const string result = "SELECT id, password, salt, admin " +

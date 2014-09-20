@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System;
@@ -21,6 +22,13 @@ namespace Bibliotheek.Models
             {BookFloors.First, "1ste"},
             {BookFloors.Second, "2de"},
             {BookFloors.Third, "3de"}
+        };
+
+        public static readonly Dictionary<int, string> DictFloorsFromInt = new Dictionary<int, string>
+        {
+            {1, "1ste"},
+            {2, "2de"},
+            {3, "3de"}
         };
 
         public static readonly Dictionary<BookGenres, string> DictGenre = new Dictionary<BookGenres, string>
@@ -88,6 +96,25 @@ namespace Bibliotheek.Models
             {BookRacks.Thirteenth, "13de"},
             {BookRacks.Fourteenth, "14de"},
             {BookRacks.Fifteenth, "15de"}
+        };
+
+        public static readonly Dictionary<int, string> DictRacksFromInt = new Dictionary<int, string>
+        {
+            {1, "1ste"},
+            {2, "2de"},
+            {3, "3de"},
+            {4, "4de"},
+            {5, "5de"},
+            {6, "6de"},
+            {7, "7de"},
+            {8, "8ste"},
+            {9, "9de"},
+            {10, "10de"},
+            {11, "11de"},
+            {12, "12de"},
+            {13, "13de"},
+            {14, "14de"},
+            {15, "15de"}
         };
 
         #endregion Public Fields
@@ -278,6 +305,59 @@ namespace Bibliotheek.Models
                     }
                 }
             }
+        }
+
+        // <summary>
+        // Add book to the database 
+        // </summary>
+        public static string SelectBookById(String id)
+        {
+            // Run model through sql prevention and save them to vars 
+            var title = String.Empty;
+            var author = String.Empty;
+            var genre = String.Empty;
+            var floor = String.Empty;
+            var rack = String.Empty;
+
+            // MySQL query 
+            const string result = "SELECT titel, auteur, genre, verdieping, rek " +
+                                  "FROM meok2_bibliotheek_boeken " +
+                                  "WHERE id = ?";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var showresult = new MySqlCommand(result, empConnection))
+                {
+                    // Bind parameters 
+                    showresult.Parameters.Add("id", MySqlDbType.VarChar).Value = SqlInjection.SafeSqlLiteral(id);
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command 
+                        using (var myDataReader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (myDataReader.Read())
+                            {
+                                // Save the values 
+                                title = myDataReader.GetString(0);
+                                author = myDataReader.GetString(1);
+                                genre = myDataReader.GetString(2);
+                                floor = myDataReader.GetString(3);
+                                rack = myDataReader.GetString(4);
+                            }
+                        }
+                    }
+                    catch (MySqlException)
+                    {
+                        // MySqlException bail out
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return title + "|" + author + "|" + genre + "|" + floor + "|" + rack;
         }
 
         #endregion Public Methods
