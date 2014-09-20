@@ -43,6 +43,7 @@ namespace Bibliotheek.Controllers
         }
 
         // GET: Genre 
+        [EnableCompression]
         public ActionResult Genre(string genre)
         {
             return View();
