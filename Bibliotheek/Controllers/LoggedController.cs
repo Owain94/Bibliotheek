@@ -1,7 +1,6 @@
 ﻿#region
 
 using Bibliotheek.Attributes;
-using Bibliotheek.Classes;
 using System.Web.Mvc;
 using System.Web.Security;
 

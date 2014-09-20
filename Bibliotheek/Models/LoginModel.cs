@@ -1,11 +1,11 @@
 ﻿#region
 
-using System;
-using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
+using System.Globalization;
 
 #endregion
 
@@ -13,7 +13,6 @@ namespace Bibliotheek.Models
 {
     public class LoginModel
     {
-
         #region Public Properties
 
         [Display(Name = "Email: ")]
@@ -25,9 +24,15 @@ namespace Bibliotheek.Models
         [Display(Name = "Wachtwoord:")]
         public string Password { get; set; }
 
+        #endregion Public Properties
+
+        #region Private Properties
+
         private int Admin { get; set; }
 
-        #endregion Public Properties
+        #endregion Private Properties
+
+        #region Public Methods
 
         public bool Login()
         {
@@ -84,5 +89,7 @@ namespace Bibliotheek.Models
             }
             return false;
         }
+
+        #endregion Public Methods
     }
 }

@@ -1,14 +1,10 @@
-﻿#region
-
-using System.Web.UI.WebControls;
+﻿using System.Web.UI.WebControls;
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
 using System;
 using System.Globalization;
 using System.Web.Mvc;
-
-#endregion
 
 namespace Bibliotheek.Controllers
 {

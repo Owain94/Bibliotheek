@@ -11,7 +11,6 @@ namespace Bibliotheek.Models
 {
     public class RegisterModel
     {
-
         #region Public Properties
 
         [Required(ErrorMessage = "Voormaam is verplicht")]

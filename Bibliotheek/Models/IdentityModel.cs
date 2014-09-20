@@ -1,10 +1,6 @@
-﻿#region
-
-using System;
+﻿using System;
 using System.Web;
 using System.Web.Security;
-
-#endregion
 
 namespace Bibliotheek.Models
 {
@@ -42,7 +38,8 @@ namespace Bibliotheek.Models
 
         public static bool CurrentUserLoggedIn
         {
-            get {
+            get
+            {
                 return HttpContext.Current.Request.IsAuthenticated;
             }
         }

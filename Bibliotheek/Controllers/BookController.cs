@@ -65,33 +65,37 @@ namespace Bibliotheek.Controllers
 
         #endregion Public Methods
 
+        #region Private Methods
+
         private static BookModel BindModel(BookModel model)
         {
-            var genreTypes = Enum.GetValues(typeof(BookModel.BookGenres)).Cast<BookModel.BookGenres>();
+            var genreTypes = Enum.GetValues(typeof (BookModel.BookGenres)).Cast<BookModel.BookGenres>();
             model.Genres = from genre in genreTypes
-                           select new SelectListItem
-                           {
-                               Text = BookModel.DictGenre[genre],
-                               Value = ((int)genre).ToString(CultureInfo.InvariantCulture)
-                           };
+                select new SelectListItem
+                {
+                    Text = BookModel.DictGenre[genre],
+                    Value = ((int) genre).ToString(CultureInfo.InvariantCulture)
+                };
 
-            var floorTypes = Enum.GetValues(typeof(BookModel.BookFloors)).Cast<BookModel.BookFloors>();
+            var floorTypes = Enum.GetValues(typeof (BookModel.BookFloors)).Cast<BookModel.BookFloors>();
             model.Floors = from floor in floorTypes
-                           select new SelectListItem
-                           {
-                               Text = BookModel.DictFloors[floor] + " verdieping",
-                               Value = ((int)floor).ToString(CultureInfo.InvariantCulture)
-                           };
+                select new SelectListItem
+                {
+                    Text = BookModel.DictFloors[floor] + " verdieping",
+                    Value = ((int) floor).ToString(CultureInfo.InvariantCulture)
+                };
 
-            var rackTypes = Enum.GetValues(typeof(BookModel.BookRacks)).Cast<BookModel.BookRacks>();
+            var rackTypes = Enum.GetValues(typeof (BookModel.BookRacks)).Cast<BookModel.BookRacks>();
             model.Racks = from rack in rackTypes
-                          select new SelectListItem
-                          {
-                              Text = BookModel.DictRacks[rack] + " rek",
-                              Value = ((int)rack).ToString(CultureInfo.InvariantCulture)
-                          };
+                select new SelectListItem
+                {
+                    Text = BookModel.DictRacks[rack] + " rek",
+                    Value = ((int) rack).ToString(CultureInfo.InvariantCulture)
+                };
 
             return model;
         }
+
+        #endregion Private Methods
     }
 }
