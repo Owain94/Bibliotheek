@@ -308,11 +308,11 @@ namespace Bibliotheek.Models
         }
 
         // <summary>
-        // Add book to the database 
+        // select book from the database 
         // </summary>
         public static string SelectBookById(String id)
         {
-            // Run model through sql prevention and save them to vars 
+            // Initial vars 
             var title = String.Empty;
             var author = String.Empty;
             var genre = String.Empty;
@@ -358,6 +358,53 @@ namespace Bibliotheek.Models
                 }
             }
             return title + "|" + author + "|" + genre + "|" + floor + "|" + rack;
+        }
+
+        // <summary>
+        // Select author from database
+        // </summary>
+        public static List<String> SelectAuthors(String name)
+        {
+            // Initial vars 
+            var list = new List<String>();
+
+            // MySQL query 
+            const string result = "SELECT id, titel, genre " +
+                                  "FROM meok2_bibliotheek_boeken " +
+                                  "WHERE auteur = ?";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var showresult = new MySqlCommand(result, empConnection))
+                {
+                    // Bind parameters 
+                    showresult.Parameters.Add("auteur", MySqlDbType.VarChar).Value = SqlInjection.SafeSqlLiteral(name);
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command 
+                        using (var myDataReader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (myDataReader.Read())
+                            {
+                                // Save the values 
+                                list.Add(myDataReader.GetString(0));
+                                list.Add(myDataReader.GetString(1));
+                                list.Add(myDataReader.GetString(2));
+                            }
+                        }
+                    }
+                    catch (MySqlException)
+                    {
+                        // MySqlException bail out
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return list;
         }
 
         #endregion Public Methods

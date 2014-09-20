@@ -50,7 +50,6 @@ namespace Bibliotheek.Controllers
         }
 
         // GET: SingleAuthor 
-        [EnableCompression]
         public ActionResult SingleAuthor(string name)
         {
             return View();

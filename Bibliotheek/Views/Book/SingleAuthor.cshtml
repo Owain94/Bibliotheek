@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Bibliotheek.Models
+@{
     ViewBag.Title = "Auteur";
     var name = Url.RequestContext.RouteData.Values["name"].ToString();
+    var authorInfo = BookModel.SelectAuthors(name);
 }
 
 <div class="span8 page-content">
@@ -12,7 +14,33 @@
         <hr>
     </article>
 
-    <p>Placeholder</p>
+    <p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Titel
+                    </th>
+                    <th>
+                        Genre
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 1; i <= authorInfo.Count / 3; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(@authorInfo[i * 3 - 2], "SingleBook", "Book", new { id = @authorInfo[i * 3 - 3] }, null)
+                        </td>
+                        <td>
+                            @Html.ActionLink(BookModel.DictGenreFromInt[Convert.ToInt16(@authorInfo[i * 3 - 1])], "Genre", "Book", new { genre = @authorInfo[i * 3 - 1] }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </p>
 </div>
 
 <aside class="span4 page-sidebar">
