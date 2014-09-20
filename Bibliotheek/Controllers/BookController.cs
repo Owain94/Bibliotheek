@@ -42,6 +42,13 @@ namespace Bibliotheek.Controllers
             return View(model);
         }
 
+        // GET: AllBooks 
+        [EnableCompression]
+        public ActionResult AllBooks()
+        {
+            return View();
+        }
+
         // GET: Genre 
         [EnableCompression]
         public ActionResult Genre(string genre)
