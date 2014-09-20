@@ -25,7 +25,7 @@ namespace Bibliotheek.Models
         [Display(Name = "Wachtwoord:")]
         public string Password { get; set; }
 
-        public int Admin { get; private set; }
+        private int Admin { get; set; }
 
         #endregion Public Properties
 
