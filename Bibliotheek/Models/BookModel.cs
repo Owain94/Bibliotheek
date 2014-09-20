@@ -316,11 +316,12 @@ namespace Bibliotheek.Models
             var title = String.Empty;
             var author = String.Empty;
             var genre = String.Empty;
+            var isbn = String.Empty;
             var floor = String.Empty;
             var rack = String.Empty;
 
             // MySQL query 
-            const string result = "SELECT titel, auteur, genre, verdieping, rek " +
+            const string result = "SELECT titel, auteur, genre, isbn, verdieping, rek " +
                                   "FROM meok2_bibliotheek_boeken " +
                                   "WHERE id = ?";
 
@@ -342,8 +343,9 @@ namespace Bibliotheek.Models
                                 title = myDataReader.GetString(0);
                                 author = myDataReader.GetString(1);
                                 genre = myDataReader.GetString(2);
-                                floor = myDataReader.GetString(3);
-                                rack = myDataReader.GetString(4);
+                                isbn = myDataReader.GetString(3);
+                                floor = myDataReader.GetString(4);
+                                rack = myDataReader.GetString(5);
                             }
                         }
                     }
@@ -357,7 +359,7 @@ namespace Bibliotheek.Models
                     }
                 }
             }
-            return title + "|" + author + "|" + genre + "|" + floor + "|" + rack;
+            return title + "|" + author + "|" + genre + "|" + isbn + "|" + floor + "|" + rack;
         }
 
         // <summary>

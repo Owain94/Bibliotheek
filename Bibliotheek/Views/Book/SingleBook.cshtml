@@ -42,10 +42,18 @@
             </tr>
             <tr>
                 <td>
+                    ISBN:
+                </td>
+                <td>
+                    @bookInfo.Split('|')[3]
+                </td>
+            </tr>
+            <tr>
+                <td>
                     Locatie:
                 </td>
                 <td>
-                    @BookModel.DictFloorsFromInt[Convert.ToInt16(bookInfo.Split('|')[3])] verdieping, @BookModel.DictRacksFromInt[Convert.ToInt16(bookInfo.Split('|')[4])] rek
+                    @BookModel.DictFloorsFromInt[Convert.ToInt16(bookInfo.Split('|')[4])] verdieping, @BookModel.DictRacksFromInt[Convert.ToInt16(bookInfo.Split('|')[5])] rek
                 </td>
             </tr>
         </table>
