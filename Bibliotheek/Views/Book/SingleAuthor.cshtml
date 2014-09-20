@@ -31,10 +31,10 @@
                 {
                     <tr>
                         <td>
-                            @Html.ActionLink(@authorInfo[i * 3 - 2], "SingleBook", "Book", new { id = @authorInfo[i * 3 - 3] }, null)
+                            @Html.ActionLink(authorInfo[i * 3 - 2], "SingleBook", "Book", new { id = authorInfo[i * 3 - 3] }, null)
                         </td>
                         <td>
-                            @Html.ActionLink(BookModel.DictGenreFromInt[Convert.ToInt16(@authorInfo[i * 3 - 1])], "Genre", "Book", new { genre = @authorInfo[i * 3 - 1] }, null)
+                            @Html.ActionLink(BookModel.DictGenreFromInt[Convert.ToInt16(authorInfo[i * 3 - 1])], "Genre", "Book", new { genre = authorInfo[i * 3 - 1] }, null)
                         </td>
                     </tr>
                 }

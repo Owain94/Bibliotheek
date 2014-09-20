@@ -1,18 +1,57 @@
-﻿@{
+﻿@using Bibliotheek.Models
+@{
     ViewBag.Title = "Genre";
     var genre = Url.RequestContext.RouteData.Values["genre"].ToString();
+    double num;
+    var isNum = Double.TryParse(genre, out num);
+    var genreInfo = new List<String>();
+    if (isNum && Convert.ToInt16(genre) >= 0 && Convert.ToInt16(genre) <= 20)
+    {
+        genreInfo = BookModel.SelectGenre(genre);
+    }
 }
 
 <div class="span8 page-content">
 
     <article class="type-page hentry clearfix">
         <h1 class="post-title">
-            <a href="#"> @genre </a>
+            <a href="#">
+                @if (isNum && Convert.ToInt16(genre) >= 0 && Convert.ToInt16(genre) <= 20)
+                {
+                    @BookModel.DictGenreFromInt[Convert.ToInt16(num)]
+                }
+            </a>
         </h1>
         <hr>
     </article>
 
-    <p>Placeholder</p>
+    <p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Titel
+                    </th>
+                    <th>
+                        Auteur
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 1; i <= genreInfo.Count / 3; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(genreInfo[i * 3 - 2], "SingleBook", "Book", new { id = genreInfo[i * 3 - 3] }, null)
+                        </td>
+                        <td>
+                            @Html.ActionLink(genreInfo[i * 3 - 1], "SingleAuthor", "Book", new { name = genreInfo[i * 3 - 1] }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </p>
 </div>
 
 <aside class="span4 page-sidebar">

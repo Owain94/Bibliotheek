@@ -43,13 +43,13 @@ namespace Bibliotheek.Controllers
         }
 
         // GET: Genre 
-        [EnableCompression]
         public ActionResult Genre(string genre)
         {
             return View();
         }
 
         // GET: SingleAuthor 
+        [EnableCompression]
         public ActionResult SingleAuthor(string name)
         {
             return View();

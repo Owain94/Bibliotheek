@@ -407,6 +407,53 @@ namespace Bibliotheek.Models
             return list;
         }
 
+        // <summary>
+        // Select genre from database
+        // </summary>
+        public static List<String> SelectGenre(String genre)
+        {
+            // Initial vars 
+            var list = new List<String>();
+
+            // MySQL query 
+            const string result = "SELECT id, titel, auteur " +
+                                  "FROM meok2_bibliotheek_boeken " +
+                                  "WHERE genre = ?";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var showresult = new MySqlCommand(result, empConnection))
+                {
+                    // Bind parameters 
+                    showresult.Parameters.Add("genre", MySqlDbType.VarChar).Value = SqlInjection.SafeSqlLiteral(genre);
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command 
+                        using (var myDataReader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (myDataReader.Read())
+                            {
+                                // Save the values 
+                                list.Add(myDataReader.GetString(0));
+                                list.Add(myDataReader.GetString(1));
+                                list.Add(myDataReader.GetString(2));
+                            }
+                        }
+                    }
+                    catch (MySqlException)
+                    {
+                        // MySqlException bail out
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return list;
+        }
+
         #endregion Public Methods
     }
 }
