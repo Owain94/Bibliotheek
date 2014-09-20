@@ -1,5 +1,7 @@
-﻿@{
+﻿@using Bibliotheek.Models
+@{
     ViewBag.Title = "Alle boeken";
+    var bookInfo = BookModel.AllBooks();
 }
 
 <div class="span8 page-content">
@@ -7,11 +9,45 @@
     <article class="type-page hentry clearfix">
         <h1 class="post-title">
             <a href="#">
-                Placeholder
+                Alle boeken
             </a>
         </h1>
         <hr>
     </article>
+
+    <p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Titel
+                    </th>
+                    <th>
+                        Auteur
+                    </th>
+                    <th>
+                        Genre
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 1; i <= bookInfo.Count / 4; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.ActionLink(bookInfo[i * 4 - 3], "SingleBook", "Book", new { id = bookInfo[i * 4 - 4] }, null)
+                        </td>
+                        <td>
+                            @Html.ActionLink(bookInfo[i * 4 - 2], "SingleAuthor", "Book", new { name = bookInfo[i * 4 - 2] }, null)
+                        </td>
+                        <td>
+                            @Html.ActionLink(BookModel.DictGenreFromInt[Convert.ToInt16(bookInfo[i * 4 - 1])], "Genre", "Book", new { genre = bookInfo[i * 4 - 1] }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </p>
 </div>
 
 <aside class="span4 page-sidebar">

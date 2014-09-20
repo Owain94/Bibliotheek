@@ -204,6 +204,51 @@ namespace Bibliotheek.Models
 
         #region Public Methods
 
+        // <summary>
+        // Select all books from database 
+        // </summary>
+        public static List<String> AllBooks()
+        {
+            // Initial vars 
+            var list = new List<String>();
+
+            // MySQL query 
+            const string result = "SELECT id, titel, auteur, genre " +
+                                  "FROM meok2_bibliotheek_boeken";
+
+            using (var empConnection = DatabaseConnection.DatabaseConnect())
+            {
+                using (var showresult = new MySqlCommand(result, empConnection))
+                {
+                    try
+                    {
+                        DatabaseConnection.DatabaseOpen(empConnection);
+                        // Execute command 
+                        using (var myDataReader = showresult.ExecuteReader(CommandBehavior.CloseConnection))
+                        {
+                            while (myDataReader.Read())
+                            {
+                                // Save the values 
+                                list.Add(myDataReader.GetString(0));
+                                list.Add(myDataReader.GetString(1));
+                                list.Add(myDataReader.GetString(2));
+                                list.Add(myDataReader.GetString(3));
+                            }
+                        }
+                    }
+                    catch (MySqlException)
+                    {
+                        // MySqlException bail out 
+                    }
+                    finally
+                    {
+                        DatabaseConnection.DatabaseClose(empConnection);
+                    }
+                }
+            }
+            return list;
+        }
+
         public static string GetNewBooks()
         {
             var id = String.Empty;
