@@ -96,6 +96,20 @@ namespace Bibliotheek.Controllers
         }
 
         //
+        // GET: /Account/AllAccounts 
+        [EnableCompression]
+        public ActionResult AllAccounts()
+        {
+            // Redirect if the user isn't an admin 
+            if (!IdentityModel.CurrentUserAdmin)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            // Get view
+            return View(new RegisterModel());
+        }
+
+        //
         // GET: /Account/Login 
         [EnableCompression]
         public ActionResult Login()
