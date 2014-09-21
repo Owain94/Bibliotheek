@@ -24,11 +24,11 @@
         </div>
 
         <div class="span2">
-            @Html.LabelFor(model => model.Inclusion)
+            @Html.LabelFor(model => model.Affix)
         </div>
         <div class="span6">
-            @Html.TextBoxFor(model => model.Inclusion, new { @class = "input-xlarge" })
-            @Html.ValidationMessageFor(model => model.Inclusion)
+            @Html.TextBoxFor(model => model.Affix, new { @class = "input-xlarge" })
+            @Html.ValidationMessageFor(model => model.Affix)
         </div>
 
         <div class="span2">
@@ -67,7 +67,7 @@
         function checkMail() {
             var url = "/Account/MailCheck";
             var mail = $('#Mail').val();
-            $.get(url, { input: mail }, function (data) {
+            $.get(url, { input: mail }, function(data) {
                 $("#returnData").html(data);
                 disableEnable();
             });
@@ -81,19 +81,19 @@
             }
         }
 
-        $('#Mail').keyup(function () {
+        $('#Mail').keyup(function() {
             checkMail();
         });
 
-        $('#Mail').change(function () {
+        $('#Mail').change(function() {
             checkMail();
         });
 
-        $('input').keyup(function () {
+        $('input').keyup(function() {
             disableEnable();
         });
 
-        $('input').change(function () {
+        $('input').change(function() {
             disableEnable();
         });
     </script>

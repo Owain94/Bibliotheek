@@ -21,7 +21,7 @@ namespace Bibliotheek.Models
         public string Firstname { get; private set; }
 
         [Display(Name = "Tussenvoegsel:")]
-        public string Inclusion { get; private set; }
+        public string Affix { get; private set; }
 
         [Display(Name = "Achternaam:")]
         public string Lastname { get; private set; }
@@ -141,7 +141,7 @@ namespace Bibliotheek.Models
                                     Firstname =
                                         SqlInjection.SafeSqlLiteralRevert(
                                             Crypt.StringDecrypt(reader.GetValue(1).ToString(), pepper));
-                                    Inclusion =
+                                    Affix =
                                         SqlInjection.SafeSqlLiteralRevert(
                                             Crypt.StringDecrypt(reader.GetValue(2).ToString(), pepper));
                                     Lastname =

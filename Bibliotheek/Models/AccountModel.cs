@@ -47,16 +47,16 @@ namespace Bibliotheek.Models
                                 var name =
                                     SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(1),
                                         pepper));
-                                var inclusion = myDataReader.GetString(2);
+                                var affix = myDataReader.GetString(2);
                                 var lastname =
                                     SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(3),
                                         pepper));
                                 var email = myDataReader.GetString(5);
 
-                                if (!String.IsNullOrEmpty(inclusion))
+                                if (!String.IsNullOrEmpty(affix))
                                 {
                                     name = name + " " +
-                                           SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(inclusion, pepper));
+                                           SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(affix, pepper));
                                 }
                                 name = name + " " + lastname;
 
@@ -111,15 +111,15 @@ namespace Bibliotheek.Models
                                 name =
                                     SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(0),
                                         pepper));
-                                var inclusion = myDataReader.GetString(1);
+                                var affix = myDataReader.GetString(1);
                                 gender = myDataReader.GetString(5);
                                 var dob = myDataReader.GetDateTime(6);
                                 mail = myDataReader.GetString(7);
 
-                                if (!String.IsNullOrEmpty(inclusion))
+                                if (!String.IsNullOrEmpty(affix))
                                 {
                                     name = name + " " +
-                                           SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(inclusion, pepper));
+                                           SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(affix, pepper));
                                 }
                                 name = name + " " +
                                        SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(2),

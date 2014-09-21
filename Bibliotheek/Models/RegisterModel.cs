@@ -19,7 +19,7 @@ namespace Bibliotheek.Models
 
         [Required(ErrorMessage = "Tussenvoegsel is verplicht")]
         [Display(Name = "Tussenvoegsel:")]
-        public string Inclusion { get; set; }
+        public string Affix { get; set; }
 
         [Required(ErrorMessage = "Achternaam is verplicht")]
         [Display(Name = "Achternaam:")]
@@ -77,7 +77,7 @@ namespace Bibliotheek.Models
         {
             // Run model through sql prevention and save them to vars 
             var firstName = SqlInjection.SafeSqlLiteral(Firstname);
-            var inclusion = SqlInjection.SafeSqlLiteral(Inclusion);
+            var affix = SqlInjection.SafeSqlLiteral(Affix);
             var lastName = SqlInjection.SafeSqlLiteral(Lastname);
             var mail = SqlInjection.SafeSqlLiteral(StringManipulation.ToLowerFast(Mail));
             var pepper = Crypt.GetRandomSalt();
@@ -132,7 +132,7 @@ namespace Bibliotheek.Models
                     insertCommand.Parameters.Add("voornaam", MySqlDbType.VarChar).Value =
                         Crypt.StringEncrypt((firstName), pepper);
                     insertCommand.Parameters.Add("tussenvoegsel", MySqlDbType.VarChar).Value =
-                        Crypt.StringEncrypt((inclusion), pepper);
+                        Crypt.StringEncrypt((affix), pepper);
                     insertCommand.Parameters.Add("achternaam", MySqlDbType.VarChar).Value =
                         Crypt.StringEncrypt((lastName), pepper);
                     insertCommand.Parameters.Add("email", MySqlDbType.VarChar).Value = mail;
