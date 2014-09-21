@@ -256,6 +256,7 @@ namespace Bibliotheek.Models
             var author = String.Empty;
             var genre = String.Empty;
             var date = String.Empty;
+
             // MySQL query Select book in the database 
             const string result = "SELECT id, titel, auteur, genre, dateadded " +
                                   "FROM meok2_bibliotheek_boeken " +

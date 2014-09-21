@@ -1,0 +1,40 @@
+﻿@using Bibliotheek.Models
+@{
+    ViewBag.Title = "Zoek een boek";
+    var bookInfo = BookModel.SearchBooks(search);
+}
+
+<div class="span8 page-content">
+
+    <article class="type-page hentry clearfix">
+        <h1 class="post-title">
+            <a href="#">
+                Boeken zoeken
+            </a>
+        </h1>
+        <hr>
+    </article>
+
+    <p>
+        @String.Join(",", @bookInfo);
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        Titel
+                    </th>
+                    <th>
+                        Auteur
+                    </th>
+                    <th>
+                        Genre
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </p>
+</div>
+
+<aside class="span4 page-sidebar">
+    @Html.Partial("_NewBook")
+</aside>

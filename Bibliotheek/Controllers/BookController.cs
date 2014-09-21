@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Web;
 using Bibliotheek.Attributes;
 using Bibliotheek.Models;
 using System;
@@ -52,6 +53,13 @@ namespace Bibliotheek.Controllers
         // GET: Genre 
         [EnableCompression]
         public ActionResult Genre(string genre)
+        {
+            return View();
+        }
+
+        // GET: SearchBooks 
+        [EnableCompression]
+        public ActionResult SearchBooks(string searchTerm)
         {
             return View();
         }

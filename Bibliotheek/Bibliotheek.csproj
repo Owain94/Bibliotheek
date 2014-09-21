@@ -309,6 +309,7 @@
     <Content Include="Views\Book\SingleBook.cshtml" />
     <Content Include="Views\Book\Genre.cshtml" />
     <Content Include="Views\Book\AllBooks.cshtml" />
+    <Content Include="Views\Book\SearchBooks.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
