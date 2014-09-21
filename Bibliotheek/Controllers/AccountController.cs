@@ -17,8 +17,8 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Activate()
         {
-            // Redirect is the user is logged in already 
-            if (System.Web.HttpContext.Current.Request.IsAuthenticated)
+            // Redirect if the user is logged in already 
+            if (IdentityModel.CurrentUserLoggedIn)
             {
                 return RedirectToAction("Account", "Logged");
             }
@@ -100,8 +100,8 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Login()
         {
-            // Redirect is the user is logged in already 
-            if (System.Web.HttpContext.Current.Request.IsAuthenticated)
+            // Redirect if the user is logged in already 
+            if (IdentityModel.CurrentUserLoggedIn)
             {
                 return RedirectToAction("Account", "Logged");
             }
@@ -148,6 +148,11 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult NewAccount()
         {
+            // Redirect if the user isn't an admin 
+            if (!IdentityModel.CurrentUserAdmin)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // Get view
             return View(new RegisterModel());
         }
@@ -158,6 +163,11 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult NewAccount(RegisterModel model)
         {
+            // Redirect if the user isn't an admin 
+            if (!IdentityModel.CurrentUserAdmin)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             // If model isn't valid return with error messages, otherwise add the user return error or success based on the AddAccount() return
             return ModelState.IsValid ? View(model.AddAccount() ? "Success" : "Error") : View();
         }
