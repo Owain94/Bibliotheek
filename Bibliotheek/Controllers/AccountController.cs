@@ -1,10 +1,13 @@
-﻿using System.Web.UI.WebControls;
+﻿#region
+
 using Bibliotheek.Attributes;
 using Bibliotheek.Classes;
 using Bibliotheek.Models;
 using System;
 using System.Globalization;
 using System.Web.Mvc;
+
+#endregion
 
 namespace Bibliotheek.Controllers
 {
@@ -35,9 +38,9 @@ namespace Bibliotheek.Controllers
                 // Get the token from the RouteData 
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-            // ReSharper disable EmptyGeneralCatchClause 
+                // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause 
+                // ReSharper restore EmptyGeneralCatchClause 
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -67,9 +70,9 @@ namespace Bibliotheek.Controllers
                 // Get the token from the RouteData 
                 token = SqlInjection.SafeSqlLiteral(Url.RequestContext.RouteData.Values["id"].ToString());
             }
-            // ReSharper disable EmptyGeneralCatchClause 
+                // ReSharper disable EmptyGeneralCatchClause 
             catch (Exception)
-            // ReSharper restore EmptyGeneralCatchClause 
+                // ReSharper restore EmptyGeneralCatchClause 
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -105,7 +108,7 @@ namespace Bibliotheek.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            // Get view
+            // Get view 
             return View(new RegisterModel());
         }
 
@@ -162,7 +165,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult NewAccount()
         {
-            // Redirect if the user isn't an admin 
+            // Redirect if the user isn't an admin
             if (!IdentityModel.CurrentUserAdmin)
             {
                 return RedirectToAction("Index", "Home");
@@ -177,7 +180,7 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult NewAccount(RegisterModel model)
         {
-            // Redirect if the user isn't an admin 
+            // Redirect if the user isn't an admin
             if (!IdentityModel.CurrentUserAdmin)
             {
                 return RedirectToAction("Index", "Home");
