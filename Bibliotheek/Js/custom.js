@@ -1,6 +1,16 @@
+/*
+*
+*   Custom JavaScript
+*   Product: KnowledgeBase WordPress Theme
+*
+* */
 jQuery(document).ready(function (e) {
+
     $ = jQuery;
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	Menu Dropdown Control
+     /*-----------------------------------------------------------------------------------*/
     $('.main-nav li').hover(function () {
         $(this).children('ul').stop(true, true).slideDown(500);
     }, function () {
@@ -11,18 +21,39 @@ jQuery(document).ready(function (e) {
         window.location = $(this).children('a').attr('href');
     });
 
+    /*-----------------------------------------------------------------------------------*/
+    /* CSS Fixes
+    /*-----------------------------------------------------------------------------------*/
+    //$(".flickr-photos > a:nth-child(3n+3) img").css("marginLeft","0px");
+
+    /*-----------------------------------------------------------------------------------*/
+    /* Apply Class on search form widget inputs
+    /*-----------------------------------------------------------------------------------*/
     $("#searchform #s").addClass("span3 search-query");
     $("#searchform #searchsubmit").addClass("btn");
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	Page's Nav
+     /*-----------------------------------------------------------------------------------*/
     $(".pages-nav a").addClass("btn");
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	Tags Cloud
+    /*-----------------------------------------------------------------------------------*/
     $('.tagcloud a').removeAttr('style').addClass('btn btn-mini');
 
-    if (jQuery().prettyPhoto) {
-        $(".pretty-photo").prettyPhoto({
-            deeplinking: false,
-            social_tools: false
-        });
+
+    /*-----------------------------------------------------------------------------------*/
+    /*	Flickr Feed
+	/*-----------------------------------------------------------------------------------*/
+
+    $('#bibliotheekrotterdam').jflickrfeed({
+        limit: 18,
+        qstrings: {
+            id: '12620519@N06'
+        },
+        itemTemplate: '<a href="{{image_b}}" title="{{title}}" data-rel="prettyPhoto[flickrg]"><img src="{{image_s}}" alt="{{title}}" /></a>'
+    }, function (data) {
 
         $('a[data-rel]').each(function () {
             $(this).attr('rel', $(this).data('rel'));
@@ -30,10 +61,35 @@ jQuery(document).ready(function (e) {
 
         $("a[rel^='prettyPhoto']").prettyPhoto({
             deeplinking: false,
+            social_tools: false,
+            overlay_gallery: false
+        });
+    });
+
+    /*-----------------------------------------------------------------------------------*/
+    /* Pretty Photo Lightbox
+	/*-----------------------------------------------------------------------------------*/
+    if (jQuery().prettyPhoto) {
+        $(".pretty-photo").prettyPhoto({
+            deeplinking: false,
+            social_tools: false
+        });
+
+
+        $('a[data-rel]').each(function () {
+            $(this).attr('rel', $(this).data('rel'));
+        });
+
+
+        $("a[rel^='prettyPhoto']").prettyPhoto({
+            deeplinking: false,
             social_tools: false
         });
     }
 
+    /* ---------------------------------------------------- */
+    /*	Accordion
+	/* ---------------------------------------------------- */
     $(function () {
         $('.accordion dt').click(function () {
             $(this).siblings('dt').removeClass('current');
@@ -41,6 +97,9 @@ jQuery(document).ready(function (e) {
         });
     });
 
+    /* ---------------------------------------------------- */
+    /*	Toggle
+	/* ---------------------------------------------------- */
     $(function () {
         $('dl.toggle dt').click(function () {
             if ($(this).hasClass('current')) {
@@ -52,6 +111,9 @@ jQuery(document).ready(function (e) {
         });
     });
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	Scroll to Top
+	/*-----------------------------------------------------------------------------------*/
     $(function () {
         $(window).scroll(function () {
             if (!$('body').hasClass('probably-mobile')) {
@@ -74,7 +136,11 @@ jQuery(document).ready(function (e) {
         });
     });
 
+    /* ---------------------------------------------------- */
+    /*	Tabs
+	/* ---------------------------------------------------- */
     $(function () {
+
         var $tabsNav = $('.tabs-nav'),
             $tabsNavLis = $tabsNav.children('li');
 
@@ -93,8 +159,13 @@ jQuery(document).ready(function (e) {
             $this.parent().next().children('.tab-content').stop(true, true).hide().eq(idx).fadeIn();
             e.preventDefault();
         });
+
     });
 
+    /* ---------------------------------------------------- */
+    /*  Responsive Tables by ZURB
+    /*	  Foundation v2.1.4 http://foundation.zurb.com
+    /* ---------------------------------------------------- */
     var switched = false;
     var updateTables = function () {
         if (($(window).width() < 767) && !switched) {
@@ -115,6 +186,7 @@ jQuery(document).ready(function (e) {
     $(window).load(updateTables);
     $(window).bind("resize", updateTables);
 
+
     function splitTable(original) {
         original.wrap("<div class='table-wrapper' />");
 
@@ -133,18 +205,27 @@ jQuery(document).ready(function (e) {
         original.unwrap();
     }
 
+    /* ---------------------------------------------------- */
+    /*	Like Button JS
+     /* ---------------------------------------------------- */
     $('#like-it-form .like-it').click(function () {
         var likeButton = $(this);
         var likeHtml = likeButton.html();
         var likeNum = parseInt(likeHtml, 10);
         likeNum++;
         likeButton.html(likeNum);
+
+        //   $('#like-it-form').ajaxSubmit(options);
     });
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	FAQs
+    /*-----------------------------------------------------------------------------------*/
     $('.faq-item').not('.faq-item.active').find('.faq-answer').slideUp('slow');
     $('.faq-item').first().addClass('active').find('.faq-answer').slideDown('slow');
 
     $('.faq-question, .faq-icon').click(function (e) {
+
         e.preventDefault();
 
         var $this = $(this);
@@ -156,15 +237,18 @@ jQuery(document).ready(function (e) {
         else {
             $parent.addClass('active').find('.faq-answer').slideDown('slow');
         }
+
     });
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	Contact Form 7
+    /*-----------------------------------------------------------------------------------*/
     $('.wpcf7-textarea').addClass('span6');
     $('.wpcf7-submit').addClass('btn');
 
-    //$('#search-form').validate({
-    //    errorLabelContainer: $("#search-error-container")
-    //});
-
+    /*-----------------------------------------------------------------------------------*/
+    /*	Responsive Nav
+    /*-----------------------------------------------------------------------------------*/
     var $mainNav = $('.main-nav > div').children('ul');
     var optionsList = '<option value="" selected>Go to...</option>';
 
@@ -188,7 +272,13 @@ jQuery(document).ready(function (e) {
         window.location = $(this).val();
     });
 
+    /*----------------------------------------------------------------------------------*/
+    /*	Contact Form AJAX validation and submition
+    /*  Validation Plugin : http://bassistance.de/jquery-plugins/jquery-plugin-validation/
+    /*	Form Ajax Plugin : http://www.malsup.com/jquery/form/
+    /*---------------------------------------------------------------------------------- */
     if (jQuery().validate && jQuery().ajaxSubmit) {
+        // Contact Form Handling
         var contact_options = {
             target: '#message-sent',
             beforeSubmit: function () {
@@ -208,9 +298,14 @@ jQuery(document).ready(function (e) {
                 $(form).ajaxSubmit(contact_options);
             }
         });
+
     }
 
+    /*-----------------------------------------------------------------------------------*/
+    /*	Live Search
+    /*-----------------------------------------------------------------------------------*/
     if (jQuery().liveSearch) {
         jQuery('#s').liveSearch({ url: 'search.php?livesearch=used&s=' });
     }
+
 });

@@ -34,11 +34,14 @@ namespace Bibliotheek
 
             var commonScriptsBundle = new CustomScriptBundle("~/Bundles/CommonScripts");
             commonScriptsBundle.Include(
-                "~/Js/jquery.easing.1.3.js",
-                "~/Js/prettyphoto/jquery.prettyPhoto.js",
-                "~/Js/jquery.liveSearch.js",
-                "~/Js/jquery.form.js",
-                "~/Js/custom.js");
+                "~/Js/jquery-2.1.1.min.js",
+                "~/Js/jquery.easing.1.3.min.js",
+                "~/Js/prettyphoto/jquery.prettyPhoto.min.js",
+                "~/Js/jflickrfeed.min.js",
+                "~/Js/jquery.liveSearch.min.js",
+                "~/Js/jquery.form.min.js",
+                "~/Js/custom.min.js");
+
             commonScriptsBundle.Orderer = nullOrderer;
             bundles.Add(commonScriptsBundle);
         }

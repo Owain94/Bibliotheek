@@ -245,12 +245,30 @@
     <Content Include="Images\video-large.png" />
     <Content Include="Images\video.png" />
     <Content Include="Js\custom.js" />
+    <Content Include="Js\custom.min.js">
+      <DependentUpon>custom.js</DependentUpon>
+    </Content>
+    <Content Include="Js\jflickrfeed.js" />
+    <Content Include="Js\jflickrfeed.min.js">
+      <DependentUpon>jflickrfeed.js</DependentUpon>
+    </Content>
     <Content Include="Js\jquery-2.1.1.min.js" />
     <Content Include="Js\jquery.easing.1.3.js" />
+    <Content Include="Js\jquery.easing.1.3.min.js">
+      <DependentUpon>jquery.easing.1.3.js</DependentUpon>
+    </Content>
     <Content Include="Js\jquery.form.js" />
+    <Content Include="Js\jquery.form.min.js">
+      <DependentUpon>jquery.form.js</DependentUpon>
+    </Content>
     <Content Include="Js\jquery.liveSearch.js" />
-    <Content Include="Js\jquery.validate.min.js" />
+    <Content Include="Js\jquery.liveSearch.min.js">
+      <DependentUpon>jquery.liveSearch.js</DependentUpon>
+    </Content>
     <Content Include="Js\prettyphoto\jquery.prettyPhoto.js" />
+    <Content Include="Js\prettyphoto\jquery.prettyPhoto.min.js">
+      <DependentUpon>jquery.prettyPhoto.js</DependentUpon>
+    </Content>
     <Content Include="Js\prettyphoto\prettyPhotoaeb9.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -295,6 +313,24 @@
     <None Include="BundleTransformer.Configuration.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Js\prettyphoto\jquery.prettyPhoto.min.js.map">
+      <DependentUpon>jquery.prettyPhoto.min.js</DependentUpon>
+    </Content>
+    <Content Include="Js\custom.min.js.map">
+      <DependentUpon>custom.min.js</DependentUpon>
+    </Content>
+    <Content Include="Js\jflickrfeed.min.js.map">
+      <DependentUpon>jflickrfeed.min.js</DependentUpon>
+    </Content>
+    <Content Include="Js\jquery.easing.1.3.min.js.map">
+      <DependentUpon>jquery.easing.1.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Js\jquery.form.min.js.map">
+      <DependentUpon>jquery.form.min.js</DependentUpon>
+    </Content>
+    <Content Include="Js\jquery.liveSearch.min.js.map">
+      <DependentUpon>jquery.liveSearch.min.js</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\School.pubxml">
       <SubType>Designer</SubType>
     </None>
