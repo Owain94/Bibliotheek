@@ -215,6 +215,11 @@ body {
 a {
     color: #3b4348;
     text-decoration: none;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
 }
 
     a:hover {
