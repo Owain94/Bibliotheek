@@ -48,7 +48,7 @@ jQuery(document).ready(function (e) {
 	/*-----------------------------------------------------------------------------------*/
 
     $('#bibliotheekrotterdam').jflickrfeed({
-        limit: 18,
+        limit: 12,
         qstrings: {
             id: '12620519@N06'
         },
