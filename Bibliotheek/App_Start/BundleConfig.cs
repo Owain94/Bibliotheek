@@ -34,7 +34,7 @@ namespace Bibliotheek
 
             var commonScriptsBundle = new CustomScriptBundle("~/Bundles/CommonScripts");
             commonScriptsBundle.Include(
-                "~/Js/jquery.easing.1,3.js",
+                "~/Js/jquery.easing.1.3.js",
                 "~/Js/prettyphoto/jquery.prettyPhoto.js",
                 "~/Js/jquery.liveSearch.js",
                 "~/Js/jquery.form.js",

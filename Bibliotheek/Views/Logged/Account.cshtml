@@ -1,5 +1,7 @@
-﻿@{
+﻿@using Bibliotheek.Models
+@{
     ViewBag.Title = "Account";
+    var account = AccountModel.GetAccountDetails();
 }
 
 <div class="span8 page-content">
@@ -7,15 +9,78 @@
     <article class="type-page hentry clearfix">
         <h1 class="post-title">
             <a href="#">
-                Placeholder
+                Mijn account
             </a>
         </h1>
         <hr>
     </article>
 
-    <p>
-        Placeholder
-    </p>
+    <ul class="tabs-nav">
+        <li class="active" style="">
+            <a href="#">Mijn account</a>
+        </li>
+        <li><a href="#">
+                Test
+            </a></li>
+        <li><a href="#">
+                Test2
+            </a></li>
+    </ul>
+
+    <div class="tabs-container">
+        <div class="tab-content">
+            <table>
+                <tr>
+                    <td width="70px">
+                        Naam:
+                    </td>
+                    <td>
+                        @account.Split('|')[0]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Adres:
+                    </td>
+                    <td>
+                        @account.Split('|')[1].Split(',')[0]<br />
+                        @account.Split('|')[1].Split(',')[1]<br />
+                        @account.Split('|')[1].Split(',')[2]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Geslacht:
+                    </td>
+                    <td>
+                        @account.Split('|')[2]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Leeftijd:
+                    </td>
+                    <td>
+                        @account.Split('|')[3]
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email:
+                    </td>
+                    <td>
+                        @account.Split('|')[4]
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab-content">
+            Test2.
+        </div>
+        <div class="tab-content">
+            Third lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
+        </div>
+    </div>
 </div>
 
 <aside class="span4 page-sidebar">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Web;
 using System.Web.Security;
 
@@ -21,18 +22,18 @@ namespace Bibliotheek.Models
             }
         }
 
-        public static int CurrentUserId
+        public static string CurrentUserId
         {
             get
             {
-                var userId = 0;
+                var userId = String.Empty;
 
                 if (HttpContext.Current.Request.IsAuthenticated)
                 {
-                    userId = Convert.ToInt32(HttpContext.Current.User.Identity.Name.Split('|')[0]);
+                    userId = HttpContext.Current.User.Identity.Name.Split('|')[0];
                 }
 
-                return userId;
+                return userId.ToString(CultureInfo.InvariantCulture);
             }
         }
 
