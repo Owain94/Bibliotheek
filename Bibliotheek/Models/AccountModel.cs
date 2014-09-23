@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System;
@@ -79,13 +80,10 @@ namespace Bibliotheek.Models
             return list;
         }
 
-        public static string GetAccountDetails()
+        public static List<String> GetAccountDetails()
         {
-            var name = String.Empty;
-            var address = String.Empty;
-            var gender = String.Empty;
-            var mail = String.Empty;
-            var age = 0;
+            // Initial vars 
+            var list = new List<String>();
 
             // MySQL query Select book in the database 
             const string result =
@@ -108,13 +106,12 @@ namespace Bibliotheek.Models
                             {
                                 // Save the values 
                                 var pepper = myDataReader.GetString(8);
-                                name =
-                                    SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(0),
-                                        pepper));
+                                var name = SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(0),
+                                    pepper));
                                 var affix = myDataReader.GetString(1);
-                                gender = myDataReader.GetString(5);
+                                var gender = myDataReader.GetString(5);
                                 var dob = myDataReader.GetDateTime(6);
-                                mail = myDataReader.GetString(7);
+                                var mail = myDataReader.GetString(7);
 
                                 if (!String.IsNullOrEmpty(affix))
                                 {
@@ -125,10 +122,8 @@ namespace Bibliotheek.Models
                                        SqlInjection.SafeSqlLiteralRevert(Crypt.StringDecrypt(myDataReader.GetString(2),
                                            pepper));
 
-                                gender = gender == "0" ? "Man" : "Vrouw";
-
                                 var today = DateTime.Today;
-                                age = today.Year - dob.Year;
+                                var age = today.Year - dob.Year;
                                 if (dob > today.AddYears(-age)) age--;
 
                                 var request =
@@ -144,13 +139,19 @@ namespace Bibliotheek.Models
                                     html = sr.ReadToEnd();
                                 }
 
-                                address = html.Split('"')[3] + " " +
-                                          SqlInjection.SafeSqlLiteralRevert(
-                                              Crypt.StringDecrypt(myDataReader.GetString(4), pepper)) +
-                                          "," +
-                                          SqlInjection.SafeSqlLiteralRevert(
-                                              Crypt.StringDecrypt(myDataReader.GetString(3), pepper)) + "," +
-                                          html.Split('"')[15];
+                                var address = html.Split('"')[3] + " " +
+                                                 SqlInjection.SafeSqlLiteralRevert(
+                                                     Crypt.StringDecrypt(myDataReader.GetString(4), pepper)) +
+                                                 "," +
+                                                 SqlInjection.SafeSqlLiteralRevert(
+                                                     Crypt.StringDecrypt(myDataReader.GetString(3), pepper)) + "," +
+                                                 html.Split('"')[15];
+                                
+                                list.Add(name);
+                                list.Add(address);
+                                list.Add(gender == "0" ? "Man" : "Vrouw");
+                                list.Add(age.ToString(CultureInfo.InvariantCulture));
+                                list.Add(mail);
                             }
                         }
                     }
@@ -164,7 +165,7 @@ namespace Bibliotheek.Models
                     }
                 }
             }
-            return name + "|" + address + "|" + gender + "|" + age + "|" + mail;
+            return list;
         }
 
         #endregion Public Methods
