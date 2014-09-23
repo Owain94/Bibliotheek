@@ -1,5 +1,6 @@
 ﻿#region
 
+using System.Globalization;
 using Bibliotheek.Classes;
 using MySql.Data.MySqlClient;
 using System;
@@ -249,13 +250,10 @@ namespace Bibliotheek.Models
             return list;
         }
 
-        public static string GetNewBooks()
+        public static List<String> GetNewBooks()
         {
-            var id = String.Empty;
-            var title = String.Empty;
-            var author = String.Empty;
-            var genre = String.Empty;
-            var date = String.Empty;
+            // Initial vars 
+            var list = new List<String>();
 
             // MySQL query Select book in the database 
             const string result = "SELECT id, titel, auteur, genre, dateadded " +
@@ -276,11 +274,11 @@ namespace Bibliotheek.Models
                             while (myDataReader.Read())
                             {
                                 // Save the values 
-                                id = id + myDataReader.GetString(0) + "|";
-                                title = title + myDataReader.GetString(1) + "|";
-                                author = author + myDataReader.GetString(2) + "|";
-                                genre = genre + myDataReader.GetInt16(3) + "|";
-                                date = date + myDataReader.GetDateTime(4).ToString("d MMM yyyy") + "|";
+                                list.Add(myDataReader.GetString(0));
+                                list.Add(myDataReader.GetString(1));
+                                list.Add(myDataReader.GetString(2));
+                                list.Add(myDataReader.GetInt16(3).ToString(CultureInfo.InvariantCulture));
+                                list.Add(myDataReader.GetDateTime(4).ToString("d MMM yyyy"));
                             }
                         }
                     }
@@ -294,7 +292,7 @@ namespace Bibliotheek.Models
                     }
                 }
             }
-            return id + title + author + genre + date;
+            return list;
         }
 
         // <summary>
