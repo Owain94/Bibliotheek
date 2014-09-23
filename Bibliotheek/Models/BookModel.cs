@@ -347,18 +347,13 @@ namespace Bibliotheek.Models
         // <summary>
         // select book from the database 
         // </summary>
-        public static string SelectBookById(String id)
+        public static List<String> SelectBookById(String id)
         {
             // Initial vars 
-            var title = String.Empty;
-            var author = String.Empty;
-            var genre = String.Empty;
-            var isbn = String.Empty;
-            var floor = String.Empty;
-            var rack = String.Empty;
+            var list = new List<String>();
 
             // MySQL query 
-            const string result = "SELECT titel, auteur, genre, isbn, verdieping, rek " +
+            const string result = "SELECT titel, auteur, genre, isbn, verdieping, rek, amount " +
                                   "FROM meok2_bibliotheek_boeken " +
                                   "WHERE id = ?";
 
@@ -377,12 +372,13 @@ namespace Bibliotheek.Models
                             while (myDataReader.Read())
                             {
                                 // Save the values 
-                                title = myDataReader.GetString(0);
-                                author = myDataReader.GetString(1);
-                                genre = myDataReader.GetString(2);
-                                isbn = myDataReader.GetString(3);
-                                floor = myDataReader.GetString(4);
-                                rack = myDataReader.GetString(5);
+                                list.Add(SqlInjection.SafeSqlLiteralRevert(myDataReader.GetString(0)));
+                                list.Add(SqlInjection.SafeSqlLiteralRevert(myDataReader.GetString(1)));
+                                list.Add(myDataReader.GetString(2));
+                                list.Add(SqlInjection.SafeSqlLiteralRevert(myDataReader.GetString(3)));
+                                list.Add(myDataReader.GetString(4));
+                                list.Add(myDataReader.GetString(5));
+                                list.Add(myDataReader.GetString(6));
                             }
                         }
                     }
@@ -396,7 +392,7 @@ namespace Bibliotheek.Models
                     }
                 }
             }
-            return title + "|" + author + "|" + genre + "|" + isbn + "|" + floor + "|" + rack;
+            return list;
         }
 
         // <summary>

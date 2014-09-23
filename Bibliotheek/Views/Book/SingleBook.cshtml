@@ -23,7 +23,7 @@
                     Titel:
                 </td>
                 <td>
-                    @bookInfo.Split('|')[0]
+                    @bookInfo[0]
                 </td>
             </tr>
             <tr>
@@ -31,7 +31,7 @@
                     Auteur:
                 </td>
                 <td>
-                    @Html.ActionLink(bookInfo.Split('|')[1], "SingleAuthor", "Book", new { name = bookInfo.Split('|')[1] }, null)
+                    @Html.ActionLink(bookInfo[1], "SingleAuthor", "Book", new { name = bookInfo[1] }, null)
                 </td>
             </tr>
             <tr>
@@ -39,7 +39,7 @@
                     Genre:
                 </td>
                 <td>
-                    @Html.ActionLink(BookModel.DictGenreFromInt[Convert.ToInt16(bookInfo.Split('|')[2])], "Genre", "Book", new { genre = bookInfo.Split('|')[2] }, null)
+                    @Html.ActionLink(BookModel.DictGenreFromInt[Convert.ToInt16(bookInfo[2])], "Genre", "Book", new { genre = bookInfo[2] }, null)
                 </td>
             </tr>
             <tr>
@@ -47,7 +47,7 @@
                     ISBN:
                 </td>
                 <td>
-                    @bookInfo.Split('|')[3]
+                    @bookInfo[3]
                 </td>
             </tr>
             <tr>
@@ -55,7 +55,15 @@
                     Locatie:
                 </td>
                 <td>
-                    @BookModel.DictFloorsFromInt[Convert.ToInt16(bookInfo.Split('|')[4])] verdieping, @BookModel.DictRacksFromInt[Convert.ToInt16(bookInfo.Split('|')[5])] rek
+                    @BookModel.DictFloorsFromInt[Convert.ToInt16(bookInfo[4])] verdieping, @BookModel.DictRacksFromInt[Convert.ToInt16(bookInfo[5])] rek
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Aantal:
+                </td>
+                <td>
+                    @bookInfo[6] boek(en)
                 </td>
             </tr>
         </table>
