@@ -59,11 +59,6 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult AllBooks()
         {
-            // Redirect if the user isn't logged in
-            if (!IdentityModel.CurrentUserLoggedIn)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 
@@ -71,11 +66,6 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult Genre(string genre)
         {
-            // Redirect if the user isn't logged in
-            if (!IdentityModel.CurrentUserLoggedIn)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 
@@ -83,11 +73,6 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult SearchBooks(string searchTerm)
         {
-            // Redirect if the user isn't logged in
-            if (!IdentityModel.CurrentUserLoggedIn)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 
@@ -95,11 +80,6 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult SingleAuthor(string name)
         {
-            // Redirect if the user isn't logged in
-            if (!IdentityModel.CurrentUserLoggedIn)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 
@@ -107,11 +87,6 @@ namespace Bibliotheek.Controllers
         [EnableCompression]
         public ActionResult SingleBook(string id)
         {
-            // Redirect if the user isn't logged in
-            if (!IdentityModel.CurrentUserLoggedIn)
-            {
-                return RedirectToAction("Index", "Home");
-            }
             return View();
         }
 

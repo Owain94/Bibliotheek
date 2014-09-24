@@ -38,6 +38,7 @@
                                 @{
                                     if (!IdentityModel.CurrentUserLoggedIn)
                                     {
+                                        <li>@Html.ActionLink("Alle boeken", "AllBooks", "Book")</li>
                                         <li>@Html.ActionLink("Login", "Login", "Account")</li>
                                     }
                                     else
