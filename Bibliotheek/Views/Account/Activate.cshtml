@@ -115,7 +115,7 @@
         var passwordCheck = false;
 
         function disableEnable() {
-            if (postalCodeCheck && passwordCheck && $('#HouseNumber').val() != "" && $('#Firstname').val() != "") {
+            if (postalCodeCheck && passwordCheck && $('#HouseNumber').val() != "" && $('#Firstname').val() != "" && $('#Dob').val() != "") {
                 $("input[type=submit]").removeAttr("disabled");
             } else {
                 $("input[type=submit]").attr("disabled", "disabled");
