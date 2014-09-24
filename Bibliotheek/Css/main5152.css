@@ -1553,3 +1553,9 @@ a#scroll-top {
 .margin15 {
     margin-bottom: 15px;
 }
+
+/* Sortable tables */
+table.sortable thead {
+    color:#3b4348;
+    cursor: default;
+}

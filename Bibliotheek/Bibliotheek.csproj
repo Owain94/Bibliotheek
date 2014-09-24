@@ -308,6 +308,10 @@
       <DependentUpon>jquery.prettyPhoto.js</DependentUpon>
     </Content>
     <Content Include="Js\prettyphoto\prettyPhotoaeb9.css" />
+    <Content Include="Js\sorttable.js" />
+    <Content Include="Js\sorttable.min.js">
+      <DependentUpon>sorttable.js</DependentUpon>
+    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -368,6 +372,9 @@
     </Content>
     <Content Include="Js\jquery.liveSearch.min.js.map">
       <DependentUpon>jquery.liveSearch.min.js</DependentUpon>
+    </Content>
+    <Content Include="Js\sorttable.min.js.map">
+      <DependentUpon>sorttable.min.js</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\School.pubxml">
       <SubType>Designer</SubType>
