@@ -17,7 +17,6 @@ namespace Bibliotheek.Models
         [Display(Name = "Voornaam:")]
         public string Firstname { get; set; }
 
-        [Required(ErrorMessage = "Tussenvoegsel is verplicht")]
         [Display(Name = "Tussenvoegsel:")]
         public string Affix { get; set; }
 
