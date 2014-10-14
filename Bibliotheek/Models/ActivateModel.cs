@@ -135,20 +135,22 @@ namespace Bibliotheek.Models
                                     var id = reader.GetValue(0).ToString();
                                     var pepper = reader.GetValue(5).ToString();
 
-                                    if (id == "-1") continue;
-                                    // Save values to the model 
-                                    Id = Convert.ToInt16(id);
-                                    Firstname =
-                                        SqlInjection.SafeSqlLiteralRevert(
-                                            Crypt.StringDecrypt(reader.GetValue(1).ToString(), pepper));
-                                    Affix =
-                                        SqlInjection.SafeSqlLiteralRevert(
-                                            Crypt.StringDecrypt(reader.GetValue(2).ToString(), pepper));
-                                    Lastname =
-                                        SqlInjection.SafeSqlLiteralRevert(
-                                            Crypt.StringDecrypt(reader.GetValue(3).ToString(), pepper));
-                                    Mail = SqlInjection.SafeSqlLiteralRevert(reader.GetValue(4).ToString());
-                                    Pepper = pepper;
+                                    if (id != "-1")
+                                    {
+                                        // Save values to the model 
+                                        Id = Convert.ToInt16(id);
+                                        Firstname =
+                                            SqlInjection.SafeSqlLiteralRevert(
+                                                Crypt.StringDecrypt(reader.GetValue(1).ToString(), pepper));
+                                        Affix =
+                                            SqlInjection.SafeSqlLiteralRevert(
+                                                Crypt.StringDecrypt(reader.GetValue(2).ToString(), pepper));
+                                        Lastname =
+                                            SqlInjection.SafeSqlLiteralRevert(
+                                                Crypt.StringDecrypt(reader.GetValue(3).ToString(), pepper));
+                                        Mail = SqlInjection.SafeSqlLiteralRevert(reader.GetValue(4).ToString());
+                                        Pepper = pepper;
+                                    }
                                 }
                             }
                         }
