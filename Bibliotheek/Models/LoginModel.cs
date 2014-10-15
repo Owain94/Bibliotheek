@@ -62,7 +62,7 @@ namespace Bibliotheek.Models
                             while (myDataReader.Read())
                             {
                                 // Save the values 
-                                savedId = myDataReader.GetValue(1).ToString();
+                                savedId = myDataReader.GetValue(0).ToString();
                                 savedPassword = myDataReader.GetString(1);
                                 savedSalt = myDataReader.GetString(2);
                                 Admin = Convert.ToInt16(myDataReader.GetValue(3));
