@@ -61,7 +61,6 @@ namespace Bibliotheek.Controllers
         //
         // POST: /Account/Activate 
         [HttpPost]
-        [EnableCompression]
         public ActionResult Activate(ActivateModel model)
         {
             string token;

@@ -13,7 +13,6 @@ namespace Bibliotheek.Controllers
         #region Public Methods
 
         // GET: Logged 
-        [EnableCompression]
         public ActionResult Account()
         {
             // Redirect if the user isn't logged in 
