@@ -108,7 +108,7 @@ namespace Bibliotheek.Controllers
             model.Floors = from floor in floorTypes
                 select new SelectListItem
                 {
-                    Text = BookModel.DictFloors[floor] + " verdieping",
+                    Text = BookModel.DictFloors[floor] + " verdieping" + " book",
                     Value = ((int) floor).ToString(CultureInfo.InvariantCulture)
                 };
 
@@ -116,7 +116,7 @@ namespace Bibliotheek.Controllers
             model.Racks = from rack in rackTypes
                 select new SelectListItem
                 {
-                    Text = BookModel.DictRacks[rack] + " rek",
+                    Text = BookModel.DictRacks[rack] + " rek" + " book",
                     Value = ((int) rack).ToString(CultureInfo.InvariantCulture)
                 };
 
